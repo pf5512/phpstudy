@@ -1,0 +1,144 @@
+@CHARSET "UTF-8";
+
+* { margin:0; padding:0;   }
+img { border:none; }
+body a{border:none;}
+ 
+a:{text-decoration: none;}
+a:link {text-decoration: none;}
+a:visited {text-decoration: none;}
+a:active {text-decoration: none;}/*消除链接默认样式*/
+
+.houtai-logo{
+	width:100%;
+	height:30px;
+	background-color:grey;
+}
+
+.houtai-logo-inside{
+	width:1200px;
+	height:30px;
+	margin:0 auto;
+}
+
+.houtai-logo-img{
+	float:left;
+}
+
+.houtai-logo-word{
+	display:block; 
+	width:1169px; 
+	height:30px; 
+	margin:0 auto; 
+	line-height:30px; 
+	background-color:grey; 
+	color:white;
+	text-align:left; 
+	font-family:Microsoft Yahei; 
+	font-size:15px;
+}
+
+.fenlei{
+display:block;
+width:700px;
+height:35px;
+line-height:35px;
+margin:0 auto;
+font-size:14px;
+background-color:#c9c9c9;
+font-family:Microsoft Yahei;
+color:black;
+}
+.sssd{
+display:block;
+width:700px;
+margin:0 auto;
+height:35px;
+line-height:35px;
+font-size:14px;
+font-family:Microsoft Yahei;
+color:black;
+}
+.title{
+display:block;
+float:left;
+font-family:Microsoft Yahei;
+color:black;
+}
+
+
+.fenlei-a{
+display:block;
+float:left;
+font-family:Microsoft Yahei;
+color:black;
+}
+
+.fenlei-a:hover{
+
+color:white;
+}
+#fenlei-a-r{
+float:right;
+color:white;
+}
+
+
+
+.bform{
+width:700px;
+height:auto;
+margin:0 auto;
+font-family:Microsoft Yahei;
+margin-top:2px;
+}
+
+.sform{
+width:700px;
+height:auto;
+margin:0 auto;
+background-color:#c9c9c9;
+font-family:Microsoft Yahei;
+font-size:14px;
+
+}
+.sform-img{
+width:700px;
+height:auto;
+margin:0 auto;
+background-color:#c9c9c9;
+font-family:Microsoft Yahei;
+font-size:14px;
+font-weight:bold;
+margin-top:3px;
+}
+
+.button-img{
+	display:block;
+    font-family:Microsoft Yahei;
+    font-size:14px;
+}
+
+.hint-word{
+display:block;
+width:700px;
+height:auto;
+margin:0 auto;
+background-color:#c9c9c9;
+font-family:Microsoft Yahei;
+line-height:30px;
+font-size:14px;
+}
+
+
+.add-button{
+dispaly:block;
+width:70px;
+height:25px;
+font-size:13px;
+font-family:Microsoft Yahei;
+margin-left:100px;
+margin-top:10px;
+}
+
+ 
