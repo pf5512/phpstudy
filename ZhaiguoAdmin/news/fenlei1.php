@@ -23,14 +23,7 @@ $type1_list = $temp_pro->type1_list();
 <link rel="stylesheet" type="text/css" href="houtai.css" />
 </head>
 <body>
-<span style="display:block; margin-top:10px;
-clear:left; width:700px; margin:0 auto;font-weight:bold;
-font-size:16px;font-family:Microsoft Yahei;
- text-align:center;margin-top:10px;"> 
-      <a href="../pro/ad_edit.php?type=1" style="background-color:#992824;color:white;">&nbsp;&nbsp;首页产品图片管理&nbsp;&nbsp;</a>
-      <a href="../news/product-edit.php?type=1" style="background-color:#992824;color:white;">&nbsp;&nbsp;新闻管理&nbsp;&nbsp;</a>
-      <a href="../pro/product-edit.php?type=1_1_1_1" style="background-color:#992824;color:white;">&nbsp;&nbsp;产品管理&nbsp;&nbsp;</a>
-</span>
+<?php include('../menu.php'); ?>
 
   <span style="display:block; width:700px;  margin:0 auto;font-size:16px;font-weight:bold;font-family:Microsoft Yahei;text-align:center;margin-top:150px;"> 
       <a href="product-edit.php?type=1_1_1_1 " style="background-color:black;color:white;">&nbsp;&nbsp;新闻管理&nbsp;&nbsp;</a>
@@ -40,8 +33,10 @@ font-size:16px;font-family:Microsoft Yahei;
 
 <div class="fenlei"><!-- logo+导航模块，用语定义logo+导航的居中 -->
     <span class="title">&nbsp;一级分类选择：&nbsp;&nbsp; </span>
-    <a class="fenlei-a" href="fenlei2.php?fenlei1=公司新闻" class="navi-all" id="navi0">公司新闻&nbsp;&nbsp;&nbsp;&nbsp;</a> 
-    <a class="fenlei-a" href="fenlei2.php?fenlei1=行业新闻" class="navi-all" id="navi0">行业新闻&nbsp;&nbsp;&nbsp;&nbsp;</a> 
+    <a class="fenlei-a" href="fenlei2.php?fenlei1=公司摘果记" class="navi-all" id="navi0">公司摘果记&nbsp;&nbsp;&nbsp;&nbsp;</a> 
+    <a class="fenlei-a" href="fenlei2.php?fenlei1=家庭摘果记" class="navi-all" id="navi0">家庭摘果记&nbsp;&nbsp;&nbsp;&nbsp;</a> 
+    <a class="fenlei-a" href="fenlei2.php?fenlei1=学友摘果记" class="navi-all" id="navi0">学友摘果记&nbsp;&nbsp;&nbsp;&nbsp;</a> 
+    <a class="fenlei-a" href="fenlei2.php?fenlei1=其他摘果记" class="navi-all" id="navi0">其他摘果记&nbsp;&nbsp;&nbsp;&nbsp;</a> 
     <a id="fenlei-a-r" href="fenlei1.php" class="navi-all" id="navi0">重新选择&nbsp;</a>
 </div>
 </body>

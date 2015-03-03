@@ -1,0 +1,247 @@
+@CHARSET "UTF-8";
+
+
+* { margin:0; padding:0;  border:0; }
+a:{text-decoration: none; }
+a:link {text-decoration: none;}
+a:visited {text-decoration: none;}
+a:active {text-decoration: none;}/*消除链接默认样式*/
+
+.logo-navi{
+display:block;
+padding:0;
+width:1200px;
+height:115px;
+margin:0 auto;
+}
+.banner-img{
+display:block;
+width:1000px;
+height:auto;
+margin:0 auto;
+margin-top:15px;
+}
+
+.banner-title{
+display:block;
+width:952px;
+height:auto;
+margin:0 auto;
+margin-top:15px;
+}
+
+#pro-all{
+width:1000px;
+height:auto;
+margin:0 auto;
+}
+
+#pro-navi{
+width:180px;
+height:auto;
+clear:left;
+float:left;
+margin-left:25px;
+}
+
+
+
+
+.pro-navi-1{
+diaplay:block;
+width:180px;
+height:25px;
+margin-top:2px;
+clear:left;
+float:left;
+color:white;
+line-height:25px;
+font-size:13px;
+font-family:Microsoft Yahei;
+background-color:#992824;
+}
+
+.pro-navi-1:hover{
+font-weight:bold;
+}
+#pro-navi-1-cli{
+diaplay:block;
+color:white;
+font-weight:bold;
+background: url(all-classify-page/pro-navi-back.jpg);
+}
+#pro-navi-1-cli:hover{
+color:white;
+background-color:#992824;
+}
+
+
+
+#pro-content{
+width:750px;
+height:auto;
+float:left;
+margin-left:45px;
+}
+.pro-content12{
+clear:left;
+float:left;
+}
+
+
+
+
+
+
+.line-content1{
+	clear:left;
+	float:left;
+	width:750px;
+	height:30px;
+	line-height:30px;
+	color:black;
+    font-size:13px;
+    font-family:Microsoft Yahei;
+}
+
+
+.line-content2{
+	clear:left;
+	float:left;
+	width:750px;
+	height:30px;
+	line-height:30px;
+	color:black;
+    font-size:13px;
+    font-family:Microsoft Yahei;
+    background-color:#ededef;
+}
+
+#frameContent{ 
+	clear:left;
+	float:left;
+    width:750x;                                 /*调整显示区的宽*/ 
+    height:420px;                                     /*调整显示区的高*/ 
+    overflow-pageINdex:hidden; 
+    overflow-y:hidden; 
+    word-break:break-all; 
+} 
+
+
+
+#inside{
+    width:750px;                                 /*调整显示区的宽*/ 
+    height:auto;  
+}
+
+
+
+
+#pages{
+display:block;
+width:750px;
+height:25px;
+clear:left;
+float:left;
+margin-top:10px;
+color:black;
+font-family:Microsoft Yahei;
+font-size:12px;
+}
+
+#pages a{
+	font-size:12px; 
+    color:#000000; 
+}
+
+
+
+#page-word-link{
+diaplay:block;
+float:right;
+margin-right:8px;
+font-family:Microsoft Yahei;
+font-size:11px;
+height:20px;
+line-height:20px;
+color:black;
+}
+
+#page-word-link:hover{
+color:#0085e1;
+}
+
+
+
+#pro-navi-banner{
+width:255px;
+clear:left;
+float:left;
+color:black;
+line-height:34px;
+font-size:16px;
+font-family:Microsoft Yahei;
+}
+
+.pro-navi-2{
+display:block;
+clear:left;
+float:left;
+width:216px;
+height:20px;
+font-size:13px;
+light-height:20px;
+border:1px solid #a4a4a4;
+margin-top:2px;
+color:#454545;
+font-family:Microsoft Yahei;
+}
+
+.pro-navi-2:hover{
+color:black;
+}
+
+#pro-navi-2-cli{
+clear:left;
+float:left;
+font-weight:bold;
+color:black;
+}
+
+.pro-navi-3{
+clear:left;
+float:left;
+display:block;
+width:218px;
+height:20px;
+light-height:20px;
+font-size:13px;
+margin-left:5px;
+color:#454545;
+font-family:Microsoft Yahei;
+}
+
+#pro-navi-3-cli{
+clear:left;
+float:left;
+color:#0085e1;
+font-weight:bold;
+background: url(navi-img/pro-navi-3-back.jpg) no-repeat;
+}
+
+#back-top{
+display:block;
+width:84px;
+height:24px;
+clear:left;
+float:left;
+margin-top:50px;
+}
+
+#buttom-banner{
+display:block;
+width:1187px;
+height:39px;
+margin:0 auto;
+}
+

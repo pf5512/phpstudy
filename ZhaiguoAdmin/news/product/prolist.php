@@ -1,5 +1,4 @@
 <?php
-header("Content-Type: text/html; charset=gb2312");
 include 'default/GeneralFunction.php';
 include 'default/newpinyin.php';
 class news{

@@ -34,14 +34,7 @@ if( count($type2_list)==1 ){
 
 </head>
 <body>
-<span style="display:block; margin-top:10px;
-clear:left; width:700px; margin:0 auto;font-weight:bold;
-font-size:16px;font-family:Microsoft Yahei;
- text-align:center;margin-top:10px;"> 
-      <a href="../pro/ad_edit.php?type=1" style="background-color:#992824;color:white;">&nbsp;&nbsp;首页产品图片管理&nbsp;&nbsp;</a>
-      <a href="../news/product-edit.php?type=1" style="background-color:#992824;color:white;">&nbsp;&nbsp;新闻管理&nbsp;&nbsp;</a>
-      <a href="../pro/product-edit.php?type=1_1_1_1" style="background-color:#992824;color:white;">&nbsp;&nbsp;产品管理&nbsp;&nbsp;</a>
-</span>
+<?php include('../menu.php'); ?>
 
   <span style="display:block; width:700px;  margin:0 auto;font-size:16px;font-weight:bold;font-family:Microsoft Yahei;text-align:center;margin-top:150px;"> 
       <a href="product-edit.php?type=1_1_1_1 " style="background-color:black;color:white;">&nbsp;&nbsp;新闻管理&nbsp;&nbsp;</a>
