@@ -107,7 +107,7 @@ $i = 1;
  *
  * @global string $cfg['Servers'][$i]['host']
  */
-$cfg['Servers'][$i]['host'] = 'localhost';
+$cfg['Servers'][$i]['host'] = 'mysql.com';
 
 /**
  * MySQL port - leave blank for default port

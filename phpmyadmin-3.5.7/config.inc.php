@@ -36,7 +36,7 @@
  *
  * @global string $cfg['PmaAbsoluteUri']
  */
-$cfg['PmaAbsoluteUri'] = 'http://localhost/phpmyadmin-3.5.7';
+$cfg['PmaAbsoluteUri'] = 'http://mysql.com';
 
 /**
  * Disable the default warning that is displayed on the DB Details Structure page if
@@ -107,7 +107,7 @@ $i = 1;
  *
  * @global string $cfg['Servers'][$i]['host']
  */
-$cfg['Servers'][$i]['host'] = 'localhost';
+$cfg['Servers'][$i]['host'] = 'http://mysql.com';
 
 /**
  * MySQL port - leave blank for default port

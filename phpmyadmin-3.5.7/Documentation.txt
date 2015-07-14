@@ -294,25 +294,25 @@ Using authentication modes
     pmapass as the controlpass, but this is only an example: use something else
     in your file! Input these statements from the phpMyAdmin SQL Query window
     or mysql command?line client.
-    Of course you have to replace localhost with the webserver's host if it's
+    Of course you have to replace mysql.com with the webserver's host if it's
     not the same as the MySQL server's one.
 
-    GRANT USAGE ON mysql.* TO 'pma'@'localhost' IDENTIFIED BY 'pmapass';
+    GRANT USAGE ON mysql.* TO 'pma'@'mysql.com' IDENTIFIED BY 'pmapass';
     GRANT SELECT (
         Host, User, Select_priv, Insert_priv, Update_priv, Delete_priv,
         Create_priv, Drop_priv, Reload_priv, Shutdown_priv, Process_priv,
         File_priv, Grant_priv, References_priv, Index_priv, Alter_priv,
         Show_db_priv, Super_priv, Create_tmp_table_priv, Lock_tables_priv,
         Execute_priv, Repl_slave_priv, Repl_client_priv
-        ) ON mysql.user TO 'pma'@'localhost';
-    GRANT SELECT ON mysql.db TO 'pma'@'localhost';
-    GRANT SELECT ON mysql.host TO 'pma'@'localhost';
+        ) ON mysql.user TO 'pma'@'mysql.com';
+    GRANT SELECT ON mysql.db TO 'pma'@'mysql.com';
+    GRANT SELECT ON mysql.host TO 'pma'@'mysql.com';
     GRANT SELECT (Host, Db, User, Table_name, Table_priv, Column_priv)
-        ON mysql.tables_priv TO 'pma'@'localhost';
+        ON mysql.tables_priv TO 'pma'@'mysql.com';
 
     If you want to use the many new relation and bookmark features:
 
-    GRANT SELECT, INSERT, UPDATE, DELETE ON <pma_db>.* TO 'pma'@'localhost';
+    GRANT SELECT, INSERT, UPDATE, DELETE ON <pma_db>.* TO 'pma'@'mysql.com';
 
     (this of course requires that your phpMyAdmin configuration storage be set
     up).
@@ -323,7 +323,7 @@ Using authentication modes
     For example, to grant the user real_user with all privileges on the
     database user_base:
 
-    GRANT ALL PRIVILEGES ON user_base.* TO 'real_user'@localhost IDENTIFIED BY 'real_password';
+    GRANT ALL PRIVILEGES ON user_base.* TO 'real_user'@mysql.com IDENTIFIED BY 'real_password';
 
     What the user may now do is controlled entirely by the MySQL user
     management system.
@@ -474,10 +474,10 @@ $cfg['Servers'] array
     copy that block or needed parts (you don't have to define all settings,
     just those you need to change).
 $cfg['Servers'][$i]['host'] string
-    The hostname or IP address of your $i-th MySQL-server. E.g. localhost.
+    The hostname or IP address of your $i-th MySQL-server. E.g. mysql.com.
 $cfg['Servers'][$i]['port'] string
     The port-number of your $i-th MySQL-server. Default is 3306 (leave blank).
-    If you use "localhost" as the hostname, MySQL ignores this port number and
+    If you use "mysql.com" as the hostname, MySQL ignores this port number and
     connects with the socket, so if you want to connect to a port different
     from the default port, use "127.0.0.1" or the real hostname in $cfg
     ['Servers'][$i]['host'].
@@ -897,7 +897,7 @@ $cfg['Servers'][$i]['AllowDeny']['rules'] array of strings
     webservers):
 
     'all' -> 0.0.0.0/0
-    'localhost' -> 127.0.0.1/8
+    'mysql.com' -> 127.0.0.1/8
     'localnetA' -> SERVER_ADDRESS/8
     'localnetB' -> SERVER_ADDRESS/16
     'localnetC' -> SERVER_ADDRESS/24
@@ -2398,14 +2398,14 @@ authentication, I'm asked to log in again. What's wrong?
 Check the value you set for the $cfg['PmaAbsoluteUri'] directive in the
 phpMyAdmin configuration file.
 
-2.6 I get an "Access denied for user: 'root@localhost' (Using password: YES)
+2.6 I get an "Access denied for user: 'root@mysql.com' (Using password: YES)
 "-error when trying to access a MySQL-Server on a host which is port-forwarded
-for my localhost.
+for my mysql.com.
 
-When you are using a port on your localhost, which you redirect via
-port-forwarding to another host, MySQL is not resolving the localhost as
+When you are using a port on your mysql.com, which you redirect via
+port-forwarding to another host, MySQL is not resolving the mysql.com as
 expected.
-Erik Wasser explains: The solution is: if your host is "localhost" MySQL (the
+Erik Wasser explains: The solution is: if your host is "mysql.com" MySQL (the
 command line tool mysql as well) always tries to use the socket connection for
 speeding up things. And that doesn't work in this configuration with port
 forwarding.
@@ -2506,7 +2506,7 @@ this:
 
 -- MySQL dump 8.22
 --
--- Host: localhost Database: database
+-- Host: mysql.com Database: database
 ---------------------------------------------------------
 -- Server version 3.23.54
 
@@ -2685,7 +2685,7 @@ blocks.
 $cfg['Servers'][$i]['AllowDeny']['order'] = 'deny,allow';
 $cfg['Servers'][$i]['AllowDeny']['rules'] = array(
     'deny root from all',
-    'allow root from localhost',
+    'allow root from mysql.com',
     'allow root from 10.0.0.0/8',
     'allow root from 192.168.0.0/16',
     'allow root from 172.16.0.0/12',
@@ -3192,7 +3192,7 @@ You need the following components:
 Here are details about configuration and operation:
 
  1. In config.inc.php your host should be defined with a FQDN (fully qualified
-    domain name) instead of "localhost".
+    domain name) instead of "mysql.com".
  2. Ensure that your target table is under the PBXT storage engine and has a
     LONGBLOB column (which must be nullable if you want to remove the BLOB
     reference from it).

@@ -2438,7 +2438,7 @@ if (! defined('PMA_MINIMUM_COMMON')) {
                     if ($i > 0) {
                         // the alpha_identifier exception is there to
                         // catch cases like
-                        // GRANT SELECT ON mydb.mytable TO myuser@localhost
+                        // GRANT SELECT ON mydb.mytable TO myuser@mysql.com
                         // (else, we get mydb.mytableTO)
                         //
                         // the quote_single exception is there to

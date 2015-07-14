@@ -300,7 +300,7 @@ function perform_config_checks()
         $cookie_auth_server = ($cf->getValue("Servers/$i/auth_type") == 'cookie');
         $cookie_auth_used |= $cookie_auth_server;
         $server_name = $cf->getServerName($i);
-        if ($server_name == 'localhost') {
+        if ($server_name == 'mysql.com') {
             $server_name .=  " [$i]";
         }
         $server_name = htmlspecialchars($server_name);

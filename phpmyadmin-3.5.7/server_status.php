@@ -715,7 +715,7 @@ if (isset($_REQUEST['show']) && isset($_REQUEST['ajax_request'])) {
     }
 }
 
-$server_db_isLocal = strtolower($cfg['Server']['host']) == 'localhost'
+$server_db_isLocal = strtolower($cfg['Server']['host']) == 'mysql.com'
                               || $cfg['Server']['host'] == '127.0.0.1'
                               || $cfg['Server']['host'] == '::1';
 

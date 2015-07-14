@@ -420,27 +420,27 @@ rm -rf config                      # remove not needed directory
         only an example: use something else in your file!</b> Input these
         statements from the phpMyAdmin <abbr title="structured query language">SQL
         </abbr> Query window or mysql command&#8211;line client.<br />
-        Of course you have to replace <tt>localhost</tt> with the webserver's host
+        Of course you have to replace <tt>mysql.com</tt> with the webserver's host
         if it's not the same as the MySQL server's one.
 
         <pre>
-GRANT USAGE ON mysql.* TO 'pma'@'localhost' IDENTIFIED BY 'pmapass';
+GRANT USAGE ON mysql.* TO 'pma'@'mysql.com' IDENTIFIED BY 'pmapass';
 GRANT SELECT (
     Host, User, Select_priv, Insert_priv, Update_priv, Delete_priv,
     Create_priv, Drop_priv, Reload_priv, Shutdown_priv, Process_priv,
     File_priv, Grant_priv, References_priv, Index_priv, Alter_priv,
     Show_db_priv, Super_priv, Create_tmp_table_priv, Lock_tables_priv,
     Execute_priv, Repl_slave_priv, Repl_client_priv
-    ) ON mysql.user TO 'pma'@'localhost';
-GRANT SELECT ON mysql.db TO 'pma'@'localhost';
-GRANT SELECT ON mysql.host TO 'pma'@'localhost';
+    ) ON mysql.user TO 'pma'@'mysql.com';
+GRANT SELECT ON mysql.db TO 'pma'@'mysql.com';
+GRANT SELECT ON mysql.host TO 'pma'@'mysql.com';
 GRANT SELECT (Host, Db, User, Table_name, Table_priv, Column_priv)
-    ON mysql.tables_priv TO 'pma'@'localhost';</pre>
+    ON mysql.tables_priv TO 'pma'@'mysql.com';</pre>
 
         If you want to use the many new relation and bookmark features:
 
         <pre>
-GRANT SELECT, INSERT, UPDATE, DELETE ON &lt;pma_db&gt;.* TO 'pma'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON &lt;pma_db&gt;.* TO 'pma'@'mysql.com';
 </pre>
 
         (this of course requires that your <a href="#linked-tables">phpMyAdmin
@@ -455,7 +455,7 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON &lt;pma_db&gt;.* TO 'pma'@'localhost';
         the database <i>user_base</i>:<br />
 
         <pre>
-GRANT ALL PRIVILEGES ON user_base.* TO 'real_user'@localhost IDENTIFIED BY 'real_password';
+GRANT ALL PRIVILEGES ON user_base.* TO 'real_user'@mysql.com IDENTIFIED BY 'real_password';
 </pre>
 
         What the user may now do is controlled entirely by the MySQL user
@@ -668,11 +668,11 @@ since this link provides funding for phpMyAdmin.
 
     <dt id="cfg_Servers_host">$cfg['Servers'][$i]['host'] string</dt>
     <dd>The hostname or <abbr title="Internet Protocol">IP</abbr> address of your
-        $i-th MySQL-server. E.g. localhost.</dd>
+        $i-th MySQL-server. E.g. mysql.com.</dd>
 
     <dt id="cfg_Servers_port">$cfg['Servers'][$i]['port'] string</dt>
     <dd>The port-number of your $i-th MySQL-server. Default is 3306 (leave
-        blank). If you use &quot;localhost&quot; as the hostname, MySQL
+        blank). If you use &quot;mysql.com&quot; as the hostname, MySQL
         ignores this port number and connects with the socket, so if you want
         to connect to a port different from the default port, use
         &quot;127.0.0.1&quot; or the real hostname in
@@ -1311,7 +1311,7 @@ CREATE DATABASE,ALTER DATABASE,DROP DATABASE</pre>
         available on all webservers):
         <pre>
 'all' -&gt; 0.0.0.0/0
-'localhost' -&gt; 127.0.0.1/8
+'mysql.com' -&gt; 127.0.0.1/8
 'localnetA' -&gt; SERVER_ADDRESS/8
 'localnetB' -&gt; SERVER_ADDRESS/16
 'localnetC' -&gt; SERVER_ADDRESS/24
@@ -3307,14 +3307,14 @@ RewriteRule .* - [F]
     directive in the phpMyAdmin configuration file.</p>
 
 <h4 id="faq2_6">
-    <a href="#faq2_6">2.6 I get an &quot;Access denied for user: 'root@localhost' (Using
+    <a href="#faq2_6">2.6 I get an &quot;Access denied for user: 'root@mysql.com' (Using
     password: YES)&quot;-error when trying to access a MySQL-Server on a
-    host which is port-forwarded for my localhost.</a></h4>
+    host which is port-forwarded for my mysql.com.</a></h4>
 
-<p> When you are using a port on your localhost, which you redirect via
-    port-forwarding to another host, MySQL is not resolving the localhost
+<p> When you are using a port on your mysql.com, which you redirect via
+    port-forwarding to another host, MySQL is not resolving the mysql.com
     as expected.<br />
-    Erik Wasser explains: The solution is: if your host is &quot;localhost&quot;
+    Erik Wasser explains: The solution is: if your host is &quot;mysql.com&quot;
     MySQL (the command line tool <code>mysql</code> as well) always tries to use the socket
     connection for speeding up things. And that doesn't work in this configuration
     with port forwarding.<br />
@@ -3446,7 +3446,7 @@ have either the <a href="http://pecl.php.net/package/APC">APC</a> extension
 <pre>
 -- MySQL dump 8.22
 --
--- Host: localhost Database: database
+-- Host: mysql.com Database: database
 ---------------------------------------------------------
 -- Server version 3.23.54
 </pre>
@@ -3703,7 +3703,7 @@ have either the <a href="http://pecl.php.net/package/APC">APC</a> extension
 $cfg['Servers'][$i]['AllowDeny']['order'] = 'deny,allow';
 $cfg['Servers'][$i]['AllowDeny']['rules'] = array(
     'deny root from all',
-    'allow root from localhost',
+    'allow root from mysql.com',
     'allow root from 10.0.0.0/8',
     'allow root from 192.168.0.0/16',
     'allow root from 172.16.0.0/12',
@@ -4363,7 +4363,7 @@ INSERT INTO REL_towns VALUES ('M', 'Montr&eacute;al');
 <p>Here are details about configuration and operation:</p>
 
 <ol>
-    <li>In <tt>config.inc.php</tt> your host should be defined with a FQDN (fully qualified domain name) instead of &quot;localhost&quot;.</li>
+    <li>In <tt>config.inc.php</tt> your host should be defined with a FQDN (fully qualified domain name) instead of &quot;mysql.com&quot;.</li>
     <li>Ensure that your target table is under the <tt>PBXT</tt> storage engine and has a <tt>LONGBLOB</tt> column (which must be nullable if you want to remove the BLOB reference from it).</li>
     <li>When you insert or update a row in this table, put a checkmark on the &quot;Upload to BLOB repository&quot; optional choice; otherwise, the upload will be done directly in your LONGBLOB column instead of the repository.</li>
     <li>Finally when you browse your table, you'll see in your column a link to stream your data, for example &quot;View image&quot;. A header containing the correct MIME-type will be sent to your browser; this MIME-type was stored at upload time.</li> 

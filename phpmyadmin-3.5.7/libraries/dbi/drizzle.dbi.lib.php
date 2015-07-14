@@ -70,7 +70,7 @@ function PMA_DBI_connect($user, $password, $is_controluser = false, $server = nu
             ? ''
             : $server['socket'];
         $server['host'] = (empty($server['host']))
-            ? 'localhost'
+            ? 'mysql.com'
             : $server['host'];
     } else {
         $server_port   = (empty($cfg['Server']['port']))
@@ -266,7 +266,7 @@ function PMA_DBI_get_host_info($link = null)
 
     $str = $link->port()
         ? $link->host() . ':' . $link->port() . ' via TCP/IP'
-        : 'Localhost via UNIX socket';
+        : 'mysql.com via UNIX socket';
     return $str;
 }
 

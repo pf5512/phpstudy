@@ -818,11 +818,11 @@ function PMA_displayLoginInformationFields($mode = 'new')
     $_current_user = PMA_DBI_fetch_value('SELECT USER();');
     if (! empty($_current_user)) {
         $thishost = str_replace("'", '', substr($_current_user, (strrpos($_current_user, '@') + 1)));
-        if ($thishost == 'localhost' || $thishost == '127.0.0.1') {
+        if ($thishost == 'mysql.com' || $thishost == '127.0.0.1') {
             unset($thishost);
         }
     }
-    echo '    onchange="if (this.value == \'any\') { hostname.value = \'%\'; } else if (this.value == \'localhost\') { hostname.value = \'localhost\'; } '
+    echo '    onchange="if (this.value == \'any\') { hostname.value = \'%\'; } else if (this.value == \'mysql.com\') { hostname.value = \'mysql.com\'; } '
        . (empty($thishost) ? '' : 'else if (this.value == \'thishost\') { hostname.value = \'' . addslashes(htmlspecialchars($thishost)) . '\'; } ')
        . 'else if (this.value == \'hosttable\') { hostname.value = \'\'; } else if (this.value == \'userdefined\') { hostname.focus(); hostname.select(); }">' . "\n";
     unset($_current_user);
@@ -830,9 +830,9 @@ function PMA_displayLoginInformationFields($mode = 'new')
     // when we start editing a user, $GLOBALS['pred_hostname'] is not defined
     if (! isset($GLOBALS['pred_hostname']) && isset($GLOBALS['hostname'])) {
         switch (strtolower($GLOBALS['hostname'])) {
-        case 'localhost':
+        case 'mysql.com':
         case '127.0.0.1':
-            $GLOBALS['pred_hostname'] = 'localhost';
+            $GLOBALS['pred_hostname'] = 'mysql.com';
             break;
         case '%':
             $GLOBALS['pred_hostname'] = 'any';
@@ -846,8 +846,8 @@ function PMA_displayLoginInformationFields($mode = 'new')
         . ((isset($GLOBALS['pred_hostname']) && $GLOBALS['pred_hostname'] == 'any')
             ? ' selected="selected"' : '') . '>' . __('Any host')
         . '</option>' . "\n"
-       . '        <option value="localhost"'
-        . ((isset($GLOBALS['pred_hostname']) && $GLOBALS['pred_hostname'] == 'localhost')
+       . '        <option value="mysql.com"'
+        . ((isset($GLOBALS['pred_hostname']) && $GLOBALS['pred_hostname'] == 'mysql.com')
             ? ' selected="selected"' : '') . '>' . __('Local')
         . '</option>' . "\n";
     if (! empty($thishost)) {
@@ -942,8 +942,8 @@ if (isset($_REQUEST['adduser_submit']) || isset($_REQUEST['change_copy'])) {
     case 'any':
         $hostname = '%';
         break;
-    case 'localhost':
-        $hostname = 'localhost';
+    case 'mysql.com':
+        $hostname = 'mysql.com';
         break;
     case 'hosttable':
         $hostname = '';
