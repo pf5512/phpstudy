@@ -1,0 +1,13 @@
+<!--{if $catalog}-->
+<div class="site-fs__cell">
+<div class="site-fs__cell-title i-tuangou">热门团购：</div>
+<div class="site-fs__cell-son1">
+{loop $catalog $i $topclass}
+<a href="{$topclass['url']}" class="topclass-name {if $topclass['selected']}selected{/if}"><font color="{$topclass[fontcolor]}">{$topclass['name']}</font></a>
+{/loop}
+<div style="clear: both;"></div>
+</div>
+<div style="clear: both; height:0px; overflow:hidden;"></div>
+<div style="display: none;">天天团购+热门分类导航</div>
+</div>
+<!--{/if}-->
