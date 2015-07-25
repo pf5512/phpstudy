@@ -1,0 +1,78 @@
+="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<link type="text/css" rel="stylesheet" href="static/css/comment2.css">
+<link type="text/css" rel="stylesheet" href="static/css/ys.css">
+
+<script type="text/javascript" src="static/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="static/js/jquery.pack.js"></script>
+<script type="text/javascript" src="static/js/jQuery.blockUI.js"></script>
+<script type="text/javascript" src="static/js/jquery.SuperSlide.js"></script>
+<script type="text/javascript" src="static/js/jquery.base64.js"></script>
+<script type="text/javascript" src="static/js/comment.js?v=20150526"></script>
+
+</head>
+<body>
+    <div class="productContent" id="status2">
+      <div class="iComment clearfix">
+        <div class="rate">
+		  <dd style="width:115px;height:32px;display:block;background:#58a30e;font-size:20px;color:white;horizontal-align:center" onclick="send_cooment()">
+				<div class="commbox" style="line-height:32px;">发表评论</div>
+          </dd>
+		  </div>
+      </div>
+		<div class="commentBox" style="display:none;">
+		<form action="javascript:;" onsubmit="submitComment(this)" method="post" name="commentForm" id="commentForm">
+			<div id="star">
+				<input type="hidden" name="rank" id="rank" value="1">
+				<input type="hidden" name="cmt_type" value="{$comment_type}">
+				<input type="hidden" name="id" value="{$id}">
+				<input type="hidden" name="email" id="email" value="null@mial.com">
+			</div>
+			<div id="uploadimg"></div>
+			<div class="clear"><h4>评论内容</h4></div>
+			<div class="bd">
+				<textarea name="content" id="content" class="textarea_long" onkeyup="checkLength(this);"></textarea>
+				<p class="g">
+					<label>&nbsp; </label>
+					<input type="submit" value="发表" class="btn_common">
+					<span t="word_calc" class="word"><b id="sy">0</b>/1000</span>
+				</p>
+			</div>
+		</form>
+		</div>
+      	<script type="text/javascript">
+		$('.CommentTab ul').find('li').click(function(){
+		  $('.CommentTab ul').find('li').removeClass('active');
+		  $('.CommentText').css({display:'none'});
+		  $(this).addClass('active');
+		  $('.CommentText').eq($(this).index()).css({display:'block'});
+		});
+		</script>
+    </div>
+	<!-- #BeginLibraryItem "/library/comments.lbi" --><!-- #EndLibraryItem -->
+<script language="javascript">
+function dorank(rank_id){
+    var rank_id;
+	$("#rank").val(rank_id);
+}
+function send_cooment(){
+    $(".commentBox").toggle();
+}
+function checkLength(which) {
+	var maxChars = 1000; //
+	if(which.value.length > maxChars){
+		alert("您出入的字数超多限制!");
+		which.value = which.value.substring(0,maxChars);
+		return false;
+	}else{
+		var curr = maxChars - which.value.length; //250 减去 当前输入的
+		document.getElementById("sy").innerHTML = curr.toString();
+		return true;
+	}
+}
+</script>
+
+
+</body>
+</html>
