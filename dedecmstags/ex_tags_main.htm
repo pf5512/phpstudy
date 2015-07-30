@@ -1,0 +1,323 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0054)http://beta.raoping.com/myad/templets/ex_tags_main.htm -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>tags管理</title>
+<link href="./ex_tags_main_files/base.css" rel="stylesheet" type="text/css">
+<script language="javascript">
+// 模拟POST提交
+formPost = function(url, data) {
+	var form = document.createElement('form');
+	form.setAttribute('method', 'POST');
+	form.setAttribute('action', url);
+	form.style.display = 'none';
+
+	if(typeof data == 'object') {
+		for(var i in data) {
+			var input = document.createElement('input');
+			input.setAttribute('type', 'hidden');
+			input.setAttribute('value', data[i]);
+			input.setAttribute('name', i);
+			form.appendChild(input);
+		}
+	}
+
+	document.body.appendChild(form);
+	form.submit();
+};
+// 全选
+function checkall(o)
+{
+	var inputs = document.getElementsByTagName('input');
+	for(var i=0; i<inputs.length; i++) {
+		if(inputs[i].name=="ids[]" && inputs[i].type=="checkbox") {
+			inputs[i].checked = o.checked;
+		}
+	}
+}
+// 更新一条记录
+function UpdateOne(tid)
+{
+	var data = {};
+	data.alias = document.getElementById('alias'+tid).value;
+	data.litpic = document.getElementById('litpic'+tid+'edit').value;
+	data.arctype_id = document.getElementById('arctype_id'+tid).value;
+	data.is_recommend = document.getElementById('is_recommend'+tid).value;
+	data.seq = document.getElementById('seq'+tid).value;
+	data.count = document.getElementById('count'+tid).value;
+	data.tid = tid;
+	data.backurl = location.href;
+	
+	formPost('ex_tags_main.php?action=update', data);
+}
+// 删除多条记录
+function DeleteMulti() {
+	var ids = [];
+	var inputs = document.getElementsByTagName('input');
+	for(var i=0; i<inputs.length; i++) {
+		if(inputs[i].name=="ids[]" && inputs[i].type=="checkbox" && inputs[i].checked) {
+			ids.push(inputs[i].value);
+		}
+	}
+	
+	var data = {};
+	data.ids = ids.join(',');
+	data.backurl = location.href;
+	
+	formPost('ex_tags_main.php?action=delete', data);
+}
+// 删除一条记录
+function DeleteOne(tid)
+{
+	var data = {};
+	data.ids = tid;
+	data.backurl = location.href;
+	
+	formPost('ex_tags_main.php?action=delete', data);
+}
+// 打开编辑下拉内容
+function EditOne(tid)
+{
+	var o = document.getElementById('edit'+tid);
+	o.style.display = (o.style.display == 'none') ? '' : 'none';
+}
+// 校正文档数
+function CheckArcCount() {
+	var ids = [];
+	var inputs = document.getElementsByTagName('input');
+	for(var i=0; i<inputs.length; i++) {
+		if(inputs[i].name=="ids[]" && inputs[i].type=="checkbox" && inputs[i].checked) {
+			ids.push(inputs[i].value);
+		}
+	}
+	
+	var data = {};
+	data.ids = ids.join(',');
+	data.backurl = location.href;
+	
+	formPost('ex_tags_main.php?action=checkArcCount', data);
+}
+// 生成静态页面
+function MakeHtml() {
+	var arctype_id = document.getElementById('makehtml').value;
+	location.href = 'ex_tags_main.php?action=makeHtml&typeid='+arctype_id;
+}
+
+function $Nav()
+{
+	if(window.navigator.userAgent.indexOf("MSIE")>=1) return 'IE';
+	else if(window.navigator.userAgent.indexOf("Firefox")>=1) return 'FF';
+	else return "OT";
+}
+
+// 图片裁剪
+function imageCut(fname, tid) {
+	if($Nav()=='IE'){ var posLeft = window.event.clientX-100; var posTop = window.event.clientY; }
+	else{ var posLeft = 100; var posTop = 100; }
+	if(!fname) fname = 'picname';
+	file = document.getElementById(fname).value;
+	if(file == '') {
+		alert('请先上传图片');
+		return false;
+	}
+	window.open("ex_tags_imagecut.php?tid="+tid+"&file="+file, "popUpImagesWin", "scrollbars=yes,resizable=yes,statebar=no,width=800,height=600,left="+posLeft+", top="+posTop);
+}
+// 选择图片
+
+</script>
+</head>
+<body>
+<div class="bodytitle">
+	<div class="bodytitleleft"></div>
+	<div class="bodytitletxt">Tags标签管理</div>
+</div>
+<div class="main">
+<form name="form1" action="http://beta.raoping.com/myad/templets/ex_tags_main.php?action=fetch" method="post" style="margin-bottom:6px;">
+<table width="98%" border="0" cellspacing="1" align="center" class="tbtitle" style="background:#E2F5BC;">
+<tbody><tr>
+  <td height="20" align="left" bgcolor="#F0FBBD" background="./ex_tags_main_files/wbg.gif">&nbsp;<strong>提取TAG</strong></td>
+</tr>
+<tr>
+  <td height="30" align="center" bgcolor="#FAFDF0">
+开始id:
+    <input type="text" name="startaid">
+结束id:
+<input type="text" name="endaid">
+&nbsp;
+<input name="submit" type="submit" value="获取tags" class="np coolbg">
+<small>(tag以文档关键词为准)</small>
+</td>
+</tr>
+</tbody></table>
+</form>
+
+
+{dede:datalist}
+
+{/dede:datalist}
+	<table width="98%" border="0" cellpadding="1" cellspacing="1" align="center" class="tbtitle" style="background:#dbe4cd;">
+    <tbody><tr>
+      <td height="20" colspan="10" bgcolor="#F0FBBD" background="./ex_tags_main_files/wbg.gif">
+      	<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+          <tbody><tr>
+            <td align="left"><strong>&nbsp;TAG维护</strong></td>
+                        <form name="form2" action="http://beta.raoping.com/myad/templets/ex_tags_main.php"></form>
+            <td width="40%" align="right">
+			
+			分类：
+				<select id="makehtml">
+					<!--?php foreach($arctype_list as $_k =--> $_v) { ?&gt;
+					<option value="&lt;?php echo $_k; ?&gt;"><!--?php echo $_v; ?--></option>
+					<!--?php } ?-->
+				</select>
+				<input type="button" name="sb" value="生成静态页面" class="np coolbg" onclick="MakeHtml()">
+			
+			&nbsp;
+			
+   	        搜索：
+   	          <input type="text" name="tag" size="10" value="&lt;?php echo $tag;?&gt;">
+   	        	<input type="submit" name="sb" value="确定" class="np coolbg">
+   	        	&nbsp; </td>
+
+          </tr>
+      </tbody></table></td>
+    </tr>
+	
+    <tr align="center" bgcolor="#F8FEE0" height="24">
+      <td width="5%">删除</td>
+      <td width="15%">标签</td>
+	  <td width="10%">别名</td>
+	  <td width="10%">分类</td>
+	  <td width="10%">是否推荐</td>
+	  <td width="10%">排序</td>
+	  <td width="10%"><a href="http://beta.raoping.com/myad/templets/ex_tags_main.php?tag=%3C?php%20echo%20$tag;?%3E&orderby=count&orderway=%3C?php%20echo%20$neworderway;?%3E"><u>点击</u></a></td>
+      <td width="10%"><a href="http://beta.raoping.com/myad/templets/ex_tags_main.php?tag=%3C?php%20echo%20$tag;?%3E&orderby=total&orderway=%3C?php%20echo%20$neworderway;?%3E"><u>文档数</u></a></td>
+	  <td width="10%"><a href="http://beta.raoping.com/myad/templets/ex_tags_main.php?tag=%3C?php%20echo%20$tag;?%3E&orderby=addtime&orderway=%3C?php%20echo%20$neworderway;?%3E"><u>添加时间</u></a></td>
+    <td></td>
+    </tr><!--?php
+	$fields['addtime'] = GetDateMk($fields['addtime']);
+	$fields['tag'] = htmlspecialchars($fields['tag']);
+?-->
+	<tr align="center" bgcolor="#FFFFFF" onmousemove="javascript:this.bgColor=&#39;#f4fbf4&#39;;" onmouseout="javascript:this.bgColor=&#39;#FFFFFF&#39;;">
+		<td height="24">
+			<input type="checkbox" name="ids[]" value="&lt;?php echo $fields[&#39;id&#39;]; ?&gt;" class="np">
+		</td>
+		<td>
+			<a href="http://beta.raoping.com/myad/tag.php?/%3C?php%20echo%20urlencode($fields[%27tag%27]);%20?%3E/" target="_blank">{dede:field.tag /}</a>
+			<!--?php if($fields['litpic']) { ?-->
+			<a href="./ex_tags_main_files/-" target="_blank" style="color:red;">[图片]</a>
+			<!--?php } ?-->
+		</td>
+		
+		<td>
+			<!--?php echo $fields['alias']; ?-->
+		</td>
+		<td>
+			<!--?php echo @$arctype_list[$fields['arctype_id']]; ?-->
+		</td>
+		<td>
+			<!--?php 
+				switch($fields['is_recommend']) {
+					case 1: echo '√'; break;
+					case 2: echo '<b-->√[重点]'; break;
+					default:
+				}
+			?&gt;
+		</td>
+		<td>
+			<!--?php echo $fields['seq']; ?-->
+		</td>
+		
+		<td>
+			<!--?php echo $fields['count']; ?-->
+		</td>
+		<td>
+			<!--?php echo $fields['total']; ?-->
+		</td>
+		<td>
+			<!--?php echo $fields['addtime']; ?-->
+		</td>
+		<td>
+		 <a href="javascript:EditOne(<?php echo $fields[" id'];="" ?="">);'&gt;[编辑]</a>
+		 <a href="javascript:DeleteOne(<?php echo $fields[" id'];="" ?="">);'&gt;[删除]</a>
+		</td>
+	</tr>
+	
+	<tr id="edit&lt;?php echo $fields[&#39;id&#39;]; ?&gt;" style="background:white;display:none;">
+		<td>&nbsp;</td>
+		<td colspan="9">
+			
+			<div style="padding-bottom: 4px;">
+				<span style="display:inline-block; width: 90px; text-align: right;">标签别名：</span>
+				<input id="alias&lt;?php echo $fields[&#39;id&#39;]; ?&gt;" type="text" value="&lt;?php echo $fields[&#39;alias&#39;]; ?&gt;" size="30">
+			</div>
+			<div style="padding-bottom: 4px;">
+				<span style="display:inline-block; width: 90px; text-align: right;">标签配图：</span>
+				<input id="litpic&lt;?php echo $fields[&#39;id&#39;]; ?&gt;edit" type="text" value="&lt;?php echo $fields[&#39;litpic&#39;]; ?&gt;" style="width: 320px;">
+				<!--图片上传-->
+				<form id="upload&lt;?php echo $fields[&#39;id&#39;]; ?&gt;" method="post" action="http://beta.raoping.com/myad/templets/ex_tags_uploadpic.php?tid=%3C?php%20echo%20$fields[%27id%27];%20?%3E" enctype="multipart/form-data" target="frame&lt;?php echo $fields[&#39;id&#39;]; ?&gt;" style="display:inline;">
+					<input value="本地上传" style="width:70px;cursor:pointer;" type="button">
+					<iframe style="display:none" src="" name="frame&lt;?php echo $fields[&#39;id&#39;]; ?&gt;"></iframe>
+					<span class="litpic_span"><input name="litpic" id="litpic" onchange="document.getElementById(&#39;upload&lt;?php echo $fields[&#39;id&#39;]; ?&gt;&#39;).submit()" size="1" class="np coolbg" type="file"></span>
+                </form>
+				<!--裁剪图片-->
+				<input type="button" class="np coolbg" onclick="imageCut(&#39;litpic&lt;?php echo $fields[&#39;id&#39;]; ?&gt;edit&#39;, &lt;?php echo $fields[&#39;id&#39;]; ?&gt;);" value="裁剪" name="Submit2">
+				<!--图片预览-->
+				<div class="divpre" id="preview&lt;?php echo $fields[&#39;id&#39;]; ?&gt;" style="width: 150px; margin-left: 95px;">
+					<!--?php if($fields['litpic']) { ?--><img width="150" src="./ex_tags_main_files/-"><!--?php } ?-->
+				</div>
+			</div>
+			<div style="padding-bottom: 4px;">
+				<span style="display:inline-block; width: 90px; text-align: right;">分类：</span>
+				<select id="arctype_id&lt;?php echo $fields[&#39;id&#39;]; ?&gt;">
+				<!--?php foreach($arctype_list as $_k =--> $_v) { ?&gt;
+					<option value="&lt;?php echo $_k; ?&gt;" <?php="" if($_k="=$fields[&#39;arctype_id&#39;])" {="" ?="">selected="true"<!--?php } ?-->&gt;<!--?php echo $_v; ?--></option>
+				<!--?php } ?-->
+				</select>
+			</div>
+			<div style="padding-bottom: 4px;">
+				<span style="display:inline-block; width: 90px; text-align: right;">推荐状态：</span>
+				<select id="is_recommend&lt;?php echo $fields[&#39;id&#39;]; ?&gt;">
+					<option value="0" <?php="" if($fields['is_recommend']="=" 0)="" {="" ?="">selected="true"<!--?php } ?-->&gt;未推荐</option>
+					<option value="1" <?php="" if($fields['is_recommend']="=" 1)="" {="" ?="">selected="true"<!--?php } ?-->&gt;推荐</option>
+					<option value="2" <?php="" if($fields['is_recommend']="=" 2)="" {="" ?="">selected="true"<!--?php } ?-->&gt;重点推荐</option>
+				</select>
+				<span>（重点推荐会加粗显示）</span>
+			</div>
+			<div style="padding-bottom: 4px;">
+				<span style="display:inline-block; width: 90px; text-align: right;">排序：</span>
+				<input id="seq&lt;?php echo $fields[&#39;id&#39;]; ?&gt;" type="text" value="&lt;?php echo $fields[&#39;seq&#39;]; ?&gt;" size="15">
+			</div>
+			<div style="padding-bottom: 4px;">
+				<span style="display:inline-block; width: 90px; text-align: right;">点击数：</span>
+				<input id="count&lt;?php echo $fields[&#39;id&#39;]; ?&gt;" type="text" value="&lt;?php echo $fields[&#39;count&#39;]; ?&gt;" size="15">
+			</div>
+			<div>
+				<span style="display:inline-block; width: 90px; text-align: right;">&nbsp;</span>
+				<input type="button" value="保存" class="np coolbg" onclick="UpdateOne(&lt;?php echo $fields[&#39;id&#39;]; ?&gt;)">
+				<input type="button" value="取消" class="np coolbg" onclick="EditOne(&lt;?php echo $fields[&#39;id&#39;]; ?&gt;)">
+			</div>
+		</td>
+	</tr><tr bgcolor="#F0FBBD">
+	<td align="center" bgcolor="#F8FEE0" height="28">
+		<label>
+			<input type="checkbox" onclick="checkall(this)" name="all" class="np">
+		  <br>全选
+		</label>
+	</td>
+	<td height="28" colspan="9" align="center" bgcolor="#F8FEE0">
+		{dede:pagelist /}
+  </td>
+	</tr>
+
+	<tr align="center" bgcolor="#FAFDF0">
+	<td height="40" colspan="10">
+		<input type="button" onclick="DeleteMulti()" class="np coolbg" value="删除所选">
+		<input type="button" onclick="CheckArcCount()" class="np coolbg" value="校正文档数">
+	</td>
+	</tr>
+	</tbody></table>
+</div>
+
+
+</body></html>
