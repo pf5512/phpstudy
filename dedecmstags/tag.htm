@@ -1,0 +1,70 @@
+
+<!-- saved from url=(0046)http://beta.raoping.com/templets/tmcms/tag.htm -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=GBK"></head><body>{dede:include filename="tmcms/header.htm"/}
+    <div class="main">
+    <div class="main_left">
+    	<div class="list_ti">
+        <h1>本月热门</h1>
+		{dede:php}
+		foreach($hot_tags as $k =&gt; $v) {
+			$class = ($v['is_recommend'] &gt; 1) ? 'tagc2' : 'tagc1';
+			$tag = $v['alias'] ? $v['alias'] : $v['tag'];
+			echo '<a class="&#39;.$class.&#39;" href="http://beta.raoping.com/templets/tmcms/'.$v['typedir'].'/'.$v['tid'].'.html">'.$tag.'</a>';
+		}
+		{/dede:php}
+        </div>
+        <div class="list_di"><img src="./tag_files/border_di.jpg" width="630" height="5"></div>
+		
+		
+		{dede:php}
+		foreach($tags as $k =&gt; $v) {
+			$tag = $v['alias'] ? $v['alias'] : $v['tag'];
+			$litpic = $v['litpic'] ? $v['litpic'] : $cfg_cmspath.'/images/defaultpic.gif';
+			
+			echo '<div class="list_box">'
+			.'<div class="list_content">'
+			.'<div class="list_pic"><a href="http://beta.raoping.com/templets/tmcms/'.$v['typedir'].'/'.$v['tid'].'.html" class="preview"><img src="./tag_files/'.$litpic.'" width="180" height="120"></a></div><a href="http://beta.raoping.com/templets/tmcms/'.$v['typedir'].'/'.$v['tid'].'.html" class="preview">'
+			.'</a><div class="list_ny"><a href="http://beta.raoping.com/templets/tmcms/'.$v['typedir'].'/'.$v['tid'].'.html" class="preview">'
+			.'</a><h2 style="width:100px;"><a href="http://beta.raoping.com/templets/tmcms/'.$v['typedir'].'/'.$v['tid'].'.html" class="preview"></a><a href="http://beta.raoping.com/templets/tmcms/'.$v['typedir'].'/'.$v['tid'].'.html">'.htmlspecialchars($tag).'</a></h2><label style="width:300px;">'.$v['total'].'文章</label>'
+			.'<div class="list_ny_box"><ul>';
+			
+			foreach($v['arc'] as $k1 =&gt; $v1) {
+				$url = str_replace('{cmspath}', $cfg_cmspath, $v1['typedir']).'/'.date('Y', $v1['pubdate']).'/'.date('md', $v1['pubdate']).'/'.$v1['aid'].'.html';
+				echo '<li><span>'.date('m-d', $v1['pubdate']).'</span><a href="http://beta.raoping.com/templets/tmcms/'.$url.'">'.htmlspecialchars($v1['title']).'</a></li>';
+			}
+			
+			echo '</ul></div>'
+			.'</div>'
+			.'</div>'
+			.'<div class="list_di"><img src="./tag_files/border_di(1).jpg" width="630" height="5"></div>'
+			.'</div>';
+		}
+		{/dede:php}
+		
+		<div class="news_page"><ul>{dede:php}echo $page_html;{/dede:php}</ul></div>
+    </div>
+	
+    <div class="main_right">
+    	<div class="tjyt">
+        <h1>推荐阅读</h1><span></span>
+        {dede:arclist flag='c' titlelen=54 row=3 imgwidth='120' imgheight='90'}
+        <h2><a href="http://beta.raoping.com/templets/tmcms/[field:arcurl/]">[field:title/]</a></h2>
+        <dl>
+        <dd><a href="http://beta.raoping.com/templets/tmcms/[field:arcurl/]">[field:image/]</a></dd>
+        <dt>[field:description function='cn_substr(@me,80)'/]...<a href="http://beta.raoping.com/templets/tmcms/[field:arcurl/]">详细&gt;&gt;</a></dt>
+        </dl>
+		{/dede:arclist}
+        </div>
+        <div class="xwrb">
+        <h1>新闻热榜</h1><span></span>
+        <ul>
+        {dede:arclist row=10 orderby=click titlelen=50}
+        <li class="xu[field:global name=autoindex runphp=&#39;yes&#39;][/field:global]"><a href="http://beta.raoping.com/templets/tmcms/[field:arcurl/]">[field:title/]</a></li>
+		{/dede:arclist}
+        </ul>
+        </div>
+        
+    </div>
+    </div>
+{dede:include filename="tmcms/footer.htm"/}
+</body></html>
