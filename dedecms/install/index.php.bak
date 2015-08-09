@@ -10,9 +10,9 @@
 //error_reporting(E_ALL);
 error_reporting(E_ALL || ~E_NOTICE);
 
-$verMsg = ' V5.7 UTF-8';
+$verMsg = ' V5.7 UTF8SP1';
 $s_lang = 'utf-8';
-$dfDbname = 'dedecmsv57utf8';
+$dfDbname = 'dedecmsv57utf8sp1';
 $errmsg = '';
 $install_demo_name = 'dedev57demo.txt';
 $insLockfile = dirname(__FILE__).'/install_lock.txt';
@@ -107,7 +107,13 @@ else if($step==3)
         $baseurl = "http://".$_SERVER['SERVER_NAME'];
     
 
-    $rnd_cookieEncode = chr(mt_rand(ord('A'),ord('Z'))).chr(mt_rand(ord('a'),ord('z'))).chr(mt_rand(ord('A'),ord('Z'))).chr(mt_rand(ord('A'),ord('Z'))).chr(mt_rand(ord('a'),ord('z'))).mt_rand(1000,9999).chr(mt_rand(ord('A'),ord('Z')));
+    $chars='abcdefghigklmnopqrstuvwxwyABCDEFGHIGKLMNOPQRSTUVWXWY0123456789';
+    $rnd_cookieEncode='';
+    $length = rand(28,32);
+    $max = strlen($chars) - 1;
+    for($i = 0; $i < $length; $i++) {
+        $rnd_cookieEncode .= $chars[mt_rand(0, $max)];
+    }
 
     if(file_get_contents($install_demo_name)) $isdemosign = 1;
     $module_local = DEDEDATA.'/module/';
@@ -150,8 +156,8 @@ else if($step==4)
     $configStr1 = str_replace("~dbprefix~",$dbprefix,$configStr1);
     $configStr1 = str_replace("~dblang~",$dblang,$configStr1);
 
-    @chmod(DEDEROOT.'/data',0777);
-    $fp = fopen(DEDEROOT."/data/common.inc.php","w") or die("<script>alert('写入配置失败，请检查../data目录是否可写入！');history.go(-1);</script>");
+    @chmod(DEDEDATA,0777);
+    $fp = fopen(DEDEDATA."/common.inc.php","w") or die("<script>alert('写入配置失败，请检查../data目录是否可写入！');history.go(-1);</script>");
     fwrite($fp,$configStr1);
     fclose($fp);
 
@@ -169,11 +175,11 @@ else if($step==4)
     $configStr2 = str_replace("~webname~",$webname,$configStr2);
     $configStr2 = str_replace("~adminmail~",$adminmail,$configStr2);
 
-    $fp = fopen(DEDEROOT.'/data/config.cache.inc.php','w');
+    $fp = fopen(DEDEDATA.'/config.cache.inc.php','w');
     fwrite($fp,$configStr2);
     fclose($fp);
 
-    $fp = fopen(DEDEROOT.'/data/config.cache.bak.php','w');
+    $fp = fopen(DEDEDATA.'/config.cache.bak.php','w');
     fwrite($fp,$configStr2);
     fclose($fp);
 
@@ -288,6 +294,8 @@ else if($step==4)
 			foreach($sqls as $sql) {
 				if(trim($sql)!='') mysql_query($sql,$conn);
 			}
+			// 更新栏目缓存
+			UpDateCatCache();
 		} else {
 			die("没有体验数据包文件,请检查是否下载.");
 		}
