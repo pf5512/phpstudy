@@ -1,0 +1,25 @@
+{dede:sppage sptype='full' srul='1' erul='5'}{/dede:sppage}
+{dede:previewurl}http://news.qq.com/a/20120505/000001.htm{/dede:previewurl}
+{dede:keywordtrim}{/dede:keywordtrim}
+{dede:descriptiontrim}{/dede:descriptiontrim}
+{dede:item field='title' value='' isunit='' isdown=''}
+   {dede:match}<title>[内容]</title>{/dede:match}
+   
+   {dede:function}{/dede:function}
+{/dede:item}{dede:item field='writer' value='' isunit='' isdown=''}
+   {dede:match}{/dede:match}
+   
+   {dede:function}{/dede:function}
+{/dede:item}{dede:item field='source' value='' isunit='' isdown=''}
+   {dede:match}{/dede:match}
+   
+   {dede:function}{/dede:function}
+{/dede:item}{dede:item field='pubdate' value='' isunit='' isdown=''}
+   {dede:match}{/dede:match}
+   
+   {dede:function}{/dede:function}
+{/dede:item}{dede:item field='body' value='' isunit='1' isdown='1'}
+   {dede:match}<em class="D76F650D76F650">[内容]</em>{/dede:match}
+   
+   {dede:function}{/dede:function}
+{/dede:item}
