@@ -1,1 +1,388 @@
-dir
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+
+		<title><?=$cfg_webname?></title>
+
+
+
+
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<meta name="kik-transparent-statusbar" content="true">
+
+		<link rel="stylesheet" href="<?=$cfg_templeturl?>/wap/css/app.min.css">
+
+		<style>
+
+			.scroll-page .loading {
+
+				margin: 12px auto;
+
+				border: 8px solid #AAA;
+
+				height: 16px;
+
+				width: 16px;
+
+				background: #CCC;
+
+				border-radius: 16px;
+
+				-webkit-animation: pulse 2s ease-in-out 0s infinite;
+
+			}
+
+		 
+
+		     img
+
+		      {
+
+			  border:0;
+
+			  *display:inline;
+
+		      }
+
+		     li
+
+		  {
+
+		      border:0;
+
+		      list-style-type :none;  
+
+		  }
+
+		  ul
+
+		  {
+
+		      list-style:none;
+
+		      margin:0;
+
+		      padding:0;
+
+		  }
+
+		      body{
+
+			  overflow-x:hidden;
+
+			  margin:0 auto;
+
+			  padding:0;
+
+			  width: 100%;
+
+			  height: 100%;
+
+		     }
+
+		     .WSCSlideWrapper{
+
+			 width:100%;
+
+			 position: relative;
+
+			 margin:0 auto;
+
+			 //cursor:move;
+
+		     }
+
+		     
+
+		     </style>
+
+	     <script type="text/javascript" src="<?=$cfg_templeturl?>/wap/js/jquery-2.1.4.js"></script>
+
+	     <script type="text/javascript" src="<?=$cfg_templeturl?>/wap/js/touchslide-1.1.js"></script>
+
+	</head>
+
+
+
+
+
+
+
+	<body>
+
+		<div class="app-page" data-page="home">
+
+			<div class="app-topbar">
+
+				<div class="app-title"><span class="app-icon"></span><?=$cfg_webname?></div>
+
+			</div>
+
+			
+
+
+
+
+			<div class="app-content">
+
+				<div class="WSCSlideWrapper" id="WSCSlideWrapper" >
+
+					<div>
+
+						<script src='http://beta.raoping.com/plus/ad_js.php?aid=14' language='javascript'></script>
+
+				      		<script src='http://beta.raoping.com/plus/ad_js.php?aid=13' language='javascript'></script>
+
+						<script src='http://beta.raoping.com/plus/ad_js.php?aid=12' language='javascript'></script>
+
+						<script src='http://beta.raoping.com/plus/ad_js.php?aid=11' language='javascript'></script>
+
+					</div>
+
+				</div>
+
+				<div class="app-section">
+
+					<ul class="app-list">
+
+						<?php 
+
+							foreach($arc_list as $arr_type)
+
+							{
+
+								$arc_arr=$arr_type->arc;
+
+								if($arc_arr==NULL) continue;
+
+								echo '<label class="app-button" data-target="scroll" data-target-args=\'{"typeid":'.$arr_type->id.',"typename":"'.$arr_type->typename.'"}\'><b>'.$arr_type->typename.'</b></label>';
+
+								foreach($arc_arr as $arr)
+
+								{
+
+									echo '<li class="app-button" data-target="detail" data-target-args=\'{"aid":'.$arr->id.'}\'>'.$arr->shorttitle.'</li>';
+
+								}
+
+							}
+
+						?>
+
+					</ul>
+
+				</div>
+
+				<script type="text/javascript">
+
+				$(document).ready(function(){
+
+				     $('.WSCSlideWrapper').height(window.screen.height);
+
+				     $('.WSCSlideWrapper').touchslide({timecontrol:3000,animatetime:300,direction:'left',navshow:true,canvassuport:true});
+
+				});
+
+				</script>
+
+				
+
+			</div>
+
+		</div>
+
+
+
+
+
+
+
+		<div class="app-page scroll-page" data-page="scroll">
+
+			<div class="app-topbar">
+
+				<div class="left app-button" data-back data-autotitle></div>
+
+				<div class="app-title"><span class="app-icon"></span>Scrolling</div>
+
+			</div>
+
+			<div class="app-content">
+
+				<div class="loading"></div>
+
+				<ul class="app-list">
+
+					<li>Item <span></span></li>
+
+				</ul>
+
+			</div>
+
+		</div>
+
+
+
+
+		<div class="app-page scroll-page" data-page="detail">
+
+			<div class="app-topbar">
+
+				<div class="left app-button" data-back data-autotitle></div>
+
+				<div class="app-title">Scrolling</div>
+
+			</div>
+
+			<div class="app-content">
+
+				<div class="app-section" id="body">
+
+					<div class="loading"></div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+
+
+
+
+
+
+
+
+
+		<!-- Not necessary, but will make our lives a little easier -->
+
+		<script src="<?=$cfg_templeturl?>/wap/js/zepto.min.js"></script>
+
+		<script src="<?=$cfg_templeturl?>/wap/js/app.min.js"></script>
+
+		<script>
+
+
+
+
+			function setupPageColour(page) {
+
+				var $topbar = $(page).find('.app-topbar');
+
+				$topbar.addClass('teal');
+
+			}
+
+
+
+
+
+
+
+			App.controller('home', function (page) {
+				setupPageColour(page);
+			});
+
+
+
+
+			App.controller('detail', function (page,data) {
+				setupPageColour(page);
+				var $loading  = $(page).find('.loading');
+				var $body =	$(page).find('#body');
+				var htmlobj=$.ajax({
+							url:"wap.php?action=article&id="+data.aid,
+							async:false,
+							dataType:'json',
+							success:function(ajax_data){
+								$body.html(ajax_data.body);
+								$(page).find('#body img').css({width:$(window).width()-48,height:($(window).width()-48)*$(page).find('#body img').height()/$(page).find('#body img').width()});
+								$(page).find('.app-title').html(ajax_data.shorttitle);
+								$loading.remove();
+							}
+						});
+				this.onShow = function () {
+					console.log('lists page is visible');
+				};
+				this.onHide = function () {
+
+					console.log('lists page is invisible');
+
+				};
+
+
+
+
+				this.onBack = function () {
+
+					console.log('lists page is going back');
+
+				};
+
+
+
+
+				this.onForward = function () {
+
+					console.log('lists page is going forward');
+
+				};
+
+			});
+
+
+
+
+			App.controller('scroll', function (page,data) {
+				setupPageColour(page);
+				$(page).find('.app-title').text(data.typename);
+				var $loading  = $(page).find('.loading'),
+					$list     = $(page).find('.app-list'),
+					$listItem = $(page).find('.app-list li'),
+					i = 1;
+					
+				$listItem.remove();
+				App.infiniteScroll($list, { loading: $loading }, function (callback) {
+					if (i ==0) {
+						return null;
+					}
+					setTimeout(function () {
+						var list = [];
+						$.ajax({
+							url:"wap.php?action=list&id="+data.typeid+"&pageno="+i,
+							async:false,
+							dataType:'json',
+							success:function(ajax_data){
+								for (var j=0;j<ajax_data.length;j++) {
+									var $node ='<li class="app-button" data-target="detail" data-target-args=\'{"aid":'+ajax_data[j].id+'}\'>'+ajax_data[j].title+'</li>';
+									list.push($node);
+								}
+								i++;
+								$loading.remove();
+								if(ajax_data.length<10) i=0;
+							}
+						});
+						callback(list);
+					}, 1200);
+				});
+			});
+			App.enableDragTransition();
+			try {
+				App.restore();
+			} catch (err) {
+				App.load('home');
+			}
+		</script>
+
+
+
+
+		
+
+	</body>
+
+</html>
