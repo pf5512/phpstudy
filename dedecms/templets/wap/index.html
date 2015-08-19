@@ -5,28 +5,15 @@
 	<head>
 
 		<title><?=$cfg_webname?></title>
-
-
-
-
 		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-
 		<meta name="kik-transparent-statusbar" content="true">
-
 		<link rel="stylesheet" href="<?=$cfg_templeturl?>/wap/css/app.min.css">
-
 		<style>
-
 			.scroll-page .loading {
-
 				margin: 12px auto;
-
 				border: 8px solid #AAA;
-
 				height: 16px;
-
 				width: 16px;
-
 				background: #CCC;
 
 				border-radius: 16px;
@@ -164,7 +151,8 @@
 
 								{
 
-									echo '<li class="app-button" data-target="detail" data-target-args=\'{"aid":'.$arr->id.'}\'>'.$arr->shorttitle.'</li>';
+									echo '<li class="app-button" data-target="detail" data-target-args=\'{"aid":'.$arr->id.'}\'>'.$arr->shorttitle.
+									'</li>';
 
 								}
 
@@ -238,7 +226,6 @@
 			</div>
 
 			<div class="app-content">
-
 				<div class="app-section" id="body">
 
 					<div class="loading"></div>
@@ -248,45 +235,17 @@
 			</div>
 
 		</div>
-
-
-
-
-
-
-
-
-
-
 		<!-- Not necessary, but will make our lives a little easier -->
-
 		<script src="<?=$cfg_templeturl?>/wap/js/zepto.min.js"></script>
-
 		<script src="<?=$cfg_templeturl?>/wap/js/app.min.js"></script>
-
 		<script>
-
-
-
 			function setupPageColour(page) {
-
 				var $topbar = $(page).find('.app-topbar');
-
 				$topbar.addClass('teal');
-
 			}
-
-
-
-
-
 			App.controller('home', function (page) {
 				setupPageColour(page);
 			});
-
-
-
-
 			App.controller('detail', function (page,data) {
 				setupPageColour(page);
 				var $loading  = $(page).find('.loading');
@@ -295,7 +254,7 @@
 				//alert(w);
 				var htmlobj=$.ajax({
 							url:"wap.php?action=article&id="+data.aid,
-							async:false,
+							async:true,
 							dataType:'json',
 							success:function(ajax_data){
 								$body.html(ajax_data.body);
@@ -316,6 +275,7 @@
 								$loading.remove();
 							}
 						});
+				$.ajax({url:"plus/count.php?view=yes&aid="+data.aid,async:true});
 				this.onShow = function () {
 					console.log('lists page is visible');
 				};
@@ -324,19 +284,9 @@
 					console.log('lists page is invisible');
 
 				};
-
-
-
-
 				this.onBack = function () {
-
 					console.log('lists page is going back');
-
 				};
-
-
-
-
 				this.onForward = function () {
 
 					console.log('lists page is going forward');
