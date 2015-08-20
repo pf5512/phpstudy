@@ -1,27 +1,16 @@
 <?php
 
 	require_once (dirname(__FILE__) . "/include/common.inc.php");
-
 	header("Content-Type: text/html; charset=utf-8");
-
 	//header("Content-type:text/vnd.wap.wml");
-
 	require_once(dirname(__FILE__)."/include/wap.inc.php");
-
+	require_once(DEDEINC."/dedetag.class.php");
 	if(empty($action)) $action = 'index';
-
 	$cfg_templets_dir = $cfg_basedir.$cfg_templets_dir;
-
 	$channellist = '';
-
 	$newartlist = '';
-
 	$channellistnext = '';
-
-	
-
 	/*//顶级导航列表
-
 	$dsql->SetQuery("Select id,typename From `#@__arctype` where reid=0 And channeltype=1 And ishidden=0 And ispart<>2 order by sortrank");
 
 	$dsql->Execute();
@@ -76,47 +65,45 @@
 		
 
 		$arc_list=array();
-
 		while($row=$dsql->GetObject())
-
-                {                       
-
+                {
                         array_push($arc_list,$row);
-
                 }
-
-		
-
 		foreach($arc_list as $arc)
-
 		{
-
 			$dsql->SetQuery("select * from #@__archives where arcrank!=-2 and typeid={$arc->id} order by id desc limit 0,10");
-
                 	$dsql->Execute();
-
 			$arc_arr=array();
-
 			while($row=$dsql->GetObject())
-
                 	{
-
                         	array_push($arc_arr,$row);
-
                 	}
-
 			$arc->arc=$arc_arr;
-
 		}
 
+		$dsql->SetQuery("select * from #@__arctype where ishidden!=1 and channeltype=2");
+		$dsql->Execute();
+		$pic_list=array();
+		while($row=$dsql->GetObject())
+                {
+                        array_push($pic_list,$row);
+                }
+		foreach($pic_list as $pic)
+		{
+			$dsql->SetQuery("select * from #@__archives,#@__addonimages where #@__archives.id=#@__addonimages.aid and #@__archives.arcrank!=-2 and #@__archives.typeid={$pic->id} order by #@__archives.id desc limit 0,10");
+                	$dsql->Execute();
+			$pic_arr=array();
+			while($row=$dsql->GetObject())
+                	{
+                        	array_push($pic_arr,$row);
+                	}
+			$pic->pics=$pic_arr;
+		}
+		
 		//显示WML
-
 		include($cfg_templets_dir."/wap/index.html");
-
 		$dsql->Close();
-
 		exit();
-
 	}
 
 	/*------------
@@ -179,57 +166,116 @@
 	------------*/
 
 	else if($action=='article')
-
 	{
-
 		//文档信息
-
 		$query = "
-
 		  Select tp.*,arc.*,addon.body From `#@__archives` arc 
-
 		  left join `#@__arctype` tp on tp.id=arc.typeid
-
 		  left join `#@__addonarticle` addon on addon.aid=arc.id
-
 		  where arc.id='$id'";
-
 		$row = $dsql->GetOne($query,MYSQL_ASSOC);
-
 		echo json_encode($row);
+		foreach($row as $k=>$v) $$k = $v;
+		unset($row);
+		$pubdate = strftime("%y-%m-%d %H:%M:%S",$pubdate);
+		if($arcrank!=0) exit();
+		$title = ConvertStr($title);
+		$body = html2wml($body);
+		if($ishidden==1) exit();
+		/*//当前栏目下级分类
+		$dsql->SetQuery("Select id,typename From `#@__arctype` where reid='$typeid' And channeltype=1 And ishidden=0 order by sortrank");
+		$dsql->Execute();
+		while($row=$dsql->GetObject()){
+			$channellistnext .= "<a href='wap.php?action=list&amp;id={$row->id}'>".ConvertStr($row->typename)."</a> ";
+		}*/
+		//栏目内容(分页输出)
+		$dsql->Close();
+		exit();
+	}
+	//文档
+
+	/*------------
+
+	function __album();
+
+	------------*/
+
+	else if($action=='album')
+	{
+		//文档信息
+		$query = "
+		  Select tp.*,arc.*,addon.imgurls From `#@__archives` arc 
+		  left join `#@__arctype` tp on tp.id=arc.typeid
+		  left join `#@__addonimages` addon on addon.aid=arc.id
+		  where arc.id='$id'";
+		$row = $dsql->GetOne($query,MYSQL_ASSOC);
+		
 
 		foreach($row as $k=>$v) $$k = $v;
-
-		unset($row);
-
+		
 		$pubdate = strftime("%y-%m-%d %H:%M:%S",$pubdate);
-
 		if($arcrank!=0) exit();
-
 		$title = ConvertStr($title);
 
-		$body = html2wml($body);
+		//echo json_encode($row);
+		//start toGetimgurls
+			$imgs=array();
+		       $j = 1;
+		       if($imgurls!=""){
+		       	 $dtp = new DedeTagParse();
+		       	 $dtp->LoadSource($imgurls);
+		       	 if(is_array($dtp->CTags))
+		       	 {
+		       	 	 foreach($dtp->CTags as $ctag)
+		       	 	 {
+		       	 	 	 if($ctag->GetName()=="img")
+		       	 	 	 {
+					     $bigimg = trim($ctag->GetInnerText());
+					     if($ctag->GetAtt('ddimg') != $bigimg && $ctag->GetAtt('ddimg')!='')
+					     {
+					     		$litimg = $ctag->GetAtt('ddimg');
+					     }
+					     else
+					     {
+					     	 $litimg = 'swfupload.php?dopost=ddimg&img='.$bigimg;
+					     }
+					     //echo $bigimg;
+					    array_push($imgs,$bigimg);
+				     /*
+				     	$fhtml = '';
+			   		$fhtml .= "<div class='albCt albEdit' id='albold{$j}'>\r\n";
+			   		$fhtml .= "	<input type='hidden' name='imgurl{$j}' value='{$bigimg}' />\r\n";
+			   		$fhtml .= "	<input type='hidden' name='imgddurl{$j}' value='{$litimg}' />\r\n";
+			   		$fhtml .= "<img src='{$litimg}' width='120' /><a href=\"javascript:delAlbPicOld('$bigimg', $j)\">[删除]</a>\r\n";
+				 	$fhtml .= "<div style='margin-top:10px'>注释：<input type='text' name='imgmsg{$j}' value='".$ctag->GetAtt('text')."' style='width:190px;' /></div>\r\n";
+				 	$fhtml .= "<div style='margin-top:10px'>更换：<input type='file' name='imgfile{$j}' size='18' style='width:190px' /></div>\r\n";
+			   		$fhtml .= "</div>\r\n";
+					echo $fhtml;
+				     */
+		       	 	 	 	 
+		       	 	 	 	$j++;
+		       	 	 	 }
+		       	 	 }
+		       	 }
+		       	 $dtp->Clear();
+		       }
+		//end toGetimgurls
+		$row[imgurls]=$imgs;
+		echo json_encode($row);
+		unset($row);
+		
+
 
 		if($ishidden==1) exit();
-
 		/*//当前栏目下级分类
-
 		$dsql->SetQuery("Select id,typename From `#@__arctype` where reid='$typeid' And channeltype=1 And ishidden=0 order by sortrank");
-
 		$dsql->Execute();
-
 		while($row=$dsql->GetObject()){
-
 			$channellistnext .= "<a href='wap.php?action=list&amp;id={$row->id}'>".ConvertStr($row->typename)."</a> ";
-
 		}*/
-
 		//栏目内容(分页输出)
-
 		$dsql->Close();
-
 		exit();
-
 	}
 
 	//错误

@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 
 <html>
-
 	<head>
 
 		<title><?=$cfg_webname?></title>
@@ -145,13 +144,38 @@
 
 								if($arc_arr==NULL) continue;
 
-								echo '<label class="app-button" data-target="scroll" data-target-args=\'{"typeid":'.$arr_type->id.',"typename":"'.$arr_type->typename.'"}\'><b>'.$arr_type->typename.'</b></label>';
+								echo '<label class="app-button" data-target="scroll" 
+								data-target-args=\'{"typeid":'.$arr_type->id.',"typename":"'.$arr_type->typename.'","chid":"'.$arr_type->channeltype.'"}\'><b>'.$arr_type->typename.'</b></label>';
 
 								foreach($arc_arr as $arr)
 
 								{
 
 									echo '<li class="app-button" data-target="detail" data-target-args=\'{"aid":'.$arr->id.'}\'>'.$arr->shorttitle.
+									'</li>';
+
+								}
+
+							}
+
+						?>
+
+						<?php 
+							foreach($pic_list as $pic_type)
+
+							{
+
+								$pic_arr=$pic_type->pics;
+
+								if($pic_arr==NULL) continue;
+
+								echo '<label class="app-button" data-target="scroll" data-target-args=\'{"typeid":'.$pic_type->id.',"typename":"'.$pic_type->typename.'","chid":"'.$pic_type->channeltype.'"}\'><b>'.$pic_type->typename.'</b></label>';
+
+								foreach($pic_arr as $pic)
+
+								{
+
+									echo '<li class="app-button" data-target="viewer" data-target-args=\'{"aid":'.$pic->id.'}\'>'.$pic->shorttitle.
 									'</li>';
 
 								}
@@ -235,9 +259,24 @@
 			</div>
 
 		</div>
-		<!-- Not necessary, but will make our lives a little easier -->
+
+
+
+		<!-- in your html -->
+		<div class="app-page dark-page" data-page="viewer">
+			<div class="app-topbar">
+		    		<div class="left app-button" data-back data-autotitle></div>
+		    		<div class="app-title">Viewer</div>
+		  	</div>
+		  	<div class="app-content">
+				<div class="loading"></div>
+			</div>
+		</div>
+		
+
 		<script src="<?=$cfg_templeturl?>/wap/js/zepto.min.js"></script>
 		<script src="<?=$cfg_templeturl?>/wap/js/app.min.js"></script>
+		<script src="<?=$cfg_templeturl?>/wap/js/photo-viewer.js"></script>
 		<script>
 			function setupPageColour(page) {
 				var $topbar = $(page).find('.app-topbar');
@@ -301,11 +340,13 @@
 			App.controller('scroll', function (page,data) {
 				setupPageColour(page);
 				$(page).find('.app-title').text(data.typename);
+				var $page="";
 				var $loading  = $(page).find('.loading'),
 					$list     = $(page).find('.app-list'),
 					$listItem = $(page).find('.app-list li'),
 					i = 1;
-					
+				if(data.chid==1)  $page="detail";
+				else if(data.chid==2)  $page="viewer";
 				$listItem.remove();
 				App.infiniteScroll($list, { loading: $loading }, function (callback) {
 					if (i ==0) {
@@ -319,7 +360,7 @@
 							dataType:'json',
 							success:function(ajax_data){
 								for (var j=0;j<ajax_data.length;j++) {
-									var $node ='<li class="app-button" data-target="detail" data-target-args=\'{"aid":'+ajax_data[j].id+'}\'>'+ajax_data[j].title+'</li>';
+									var $node ='<li class="app-button" data-target="'+$page+'" data-target-args=\'{"aid":'+ajax_data[j].id+'}\'>'+ajax_data[j].title+'</li>';
 									list.push($node);
 								}
 								i++;
@@ -331,6 +372,34 @@
 					}, 1200);
 				});
 			});
+
+			// in your js
+			App.controller('viewer', function (page, data) {
+				setupPageColour(page);
+				var $loading  = $(page).find('.loading');
+				var w=$(window).width()-48;//app-section宽度
+				var htmlobj=$.ajax({
+							url:"wap.php?action=album&id="+data.aid,
+							async:true,
+							dataType:'json',
+							success:function(ajax_data){
+								//$body.html(ajax_data.body);
+								$(page).find('.app-title').html(ajax_data.shorttitle);
+								//var imgurls=ajax_data.imgurls;
+								var photoViewer = new PhotoViewer(page,ajax_data.imgurls);
+								$loading.remove();
+							}
+						});
+			  	
+			});
+			App.enableDragTransition();
+			try {
+				App.restore();
+			} catch (err) {
+				App.load('viewer');
+			}
+
+
 			App.enableDragTransition();
 			try {
 				App.restore();
