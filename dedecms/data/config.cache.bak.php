@@ -1,7 +1,7 @@
 <?php
-$cfg_basehost = 'http://dede.com';
+$cfg_basehost = 'http://dedecms.com';
 $cfg_cmspath = '';
-$cfg_cookie_encode = 'KfHBt4994M';
+$cfg_cookie_encode = '5yDPeFEAxURwwssoGGq4gTr0wecg';
 $cfg_indexurl = '/';
 $cfg_backup_dir = 'backupdata';
 $cfg_indexname = '主页';
@@ -39,7 +39,7 @@ $cfg_ftp_root = '/';
 $cfg_ftp_mkdir = 'N';
 $cfg_feedback_ck = 'Y';
 $cfg_list_son = 'Y';
-$cfg_mb_open = 'Y';
+$cfg_mb_open = 'N';
 $cfg_mb_album = 'Y';
 $cfg_mb_upload = 'Y';
 $cfg_mb_upload_size = 1024;
@@ -143,4 +143,6 @@ $cfg_mb_reginfo = 'Y';
 $cfg_remote_site = 'N';
 $cfg_title_site = 'N';
 $cfg_mysql_type = 'mysqli';
+$cfg_memcache_enable = 'N';
+$cfg_sphinx_article = 'N';
 ?>

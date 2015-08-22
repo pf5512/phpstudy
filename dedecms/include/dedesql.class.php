@@ -47,7 +47,7 @@ class DedeSql
     function __construct($pconnect=FALSE,$nconnect=FALSE)
     {
         $this->isClose = FALSE;
-        $this->safeCheck = TRUE;
+        $this->safeCheck = false;
 		$this->pconnect = $pconnect;
         if($nconnect)
         {

@@ -12,72 +12,45 @@
 	$channellistnext = '';
 	/*//顶级导航列表
 	$dsql->SetQuery("Select id,typename From `#@__arctype` where reid=0 And channeltype=1 And ishidden=0 And ispart<>2 order by sortrank");
-
 	$dsql->Execute();
-
 	while($row=$dsql->GetObject())
-
 	{
-
 		$channellist .= "<a href='wap.php?action=list&amp;id={$row->id}'>{$row->typename}</a> ";
-
 	}*/
-
 	//当前时间
-
 	$curtime = strftime("%Y-%m-%d %H:%M:%S",time());
-
 	$cfg_webname = ConvertStr($cfg_webname);
 
-
-
-
 	//主页
-
 	/*------------
-
 	function __index();
 
 	------------*/
-
 	if($action=='index')
-
 	{
-
 		//最新文章
-
 		$dsql->SetQuery("Select id,title,pubdate From `#@__archives` where channel=1 And arcrank = 0 order by id desc limit 0,10");
-
 		$dsql->Execute();
-
 		/*while($row=$dsql->GetObject())
-
 		{
-
 			$newartlist .= "<a href='wap.php?action=article&amp;id={$row->id}'>".ConvertStr($row->title)."</a> [".date("m-d",$row->pubdate)."]<br />";
-
 		}*/
-
 		$dsql->SetQuery("select * from #@__arctype where ishidden!=1 and channeltype=1");
-
 		$dsql->Execute();
-
-		
-
 		$arc_list=array();
 		while($row=$dsql->GetObject())
-                {
-                        array_push($arc_list,$row);
-                }
+        {
+            array_push($arc_list,$row);
+        }
 		foreach($arc_list as $arc)
 		{
 			$dsql->SetQuery("select * from #@__archives where arcrank!=-2 and typeid={$arc->id} order by id desc limit 0,10");
-                	$dsql->Execute();
+            $dsql->Execute();
 			$arc_arr=array();
 			while($row=$dsql->GetObject())
-                	{
-                        	array_push($arc_arr,$row);
-                	}
+            {
+                array_push($arc_arr,$row);
+            }
 			$arc->arc=$arc_arr;
 		}
 

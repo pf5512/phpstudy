@@ -1,6 +1,16 @@
 <?php
 if(!defined('DEDEINC')) exit('Request Error!');
-define('PLUS_BAIDUSITEMAP_VER','0.0.2');
+define('PLUS_BAIDUSITEMAP_VER','0.0.5');
+
+$now = time();
+
+$GLOBALS['update_sqls']=array(
+    '0.0.3'=>array(
+        "INSERT INTO `#@__plus_baidusitemap_setting` (`skey`, `svalue`, `stime`) VALUES ('site_id', '0', 0);",
+        "INSERT INTO `#@__plus_baidusitemap_setting` (`skey`, `svalue`, `stime`) VALUES ('version', '0.0.3', {$now});",
+    ),
+);
+
 function baidu_http_send($url, $limit=0, $post='', $cookie='', $timeout=15)
 {
     $return = '';
@@ -132,7 +142,9 @@ INSERT INTO `#@__plus_baidusitemap_setting` (`skey`, `svalue`, `stime`) VALUES
 	('bdpwd', '', 0),
 	('setupmaxaid', '', 0),
 	('lastuptime_all', '', 0),
-	('lastuptime_inc', '', 0);
+	('lastuptime_inc', '', 0),
+	('version', '0.0.3', 0),
+	('site_id', '', 0);
 EOT;
         $sqlquery = str_replace("\r","",$install_sql);
         $sqls = preg_split("#;[ \t]{0,}\n#",$sqlquery);
@@ -161,7 +173,7 @@ EOT;
                 $nerrCode .= "执行： <font color='blue'>$q</font> 出错，错误提示：<font color='red'>".$errCode."</font><br>";
             }
         }
-        ShowMsg("成功安装数据库！首次安装进行全量索引提交，此过程可能比较长，请耐心等待……".$nerrCode,"baidusitemap_main.php?dopost=auth&action=resubmit",0,5000);
+        ShowMsg("成功安装数据库！您需要绑定站点ID完成站点验证后才能进行数据提交……".$nerrCode,"?");
         exit();
     } else {
         return True;
@@ -216,8 +228,9 @@ function baidu_strip_invalid_xml($value)
 function baidu_savesitemap($action, $site, $type, $bdpwd, $sign)
 {
     global $dsql,$cfg_plus_dir,$cfg_basehost;
-    //$siteurl = $cfg_basehost;
-    $siteurl = $site;
+    $siteurl = baidu_get_setting('siteurl');
+    $token = baidu_get_setting('pingtoken');
+    $sign=md5($siteurl.$token);
     $zzaction = '';
     $bdpwd=addslashes($bdpwd);
     if (0 == strncasecmp('save', $action, 3)) {
@@ -237,7 +250,7 @@ function baidu_savesitemap($action, $site, $type, $bdpwd, $sign)
     } else {
         return false;
     }
-    $resource_name='RDF_Other_Webpage';
+    $resource_name='CustomSearch_Normal';
     $bdarcs = new BaiduArticleXml;
     $bdarcs->setSitemapType($type);
     $arctotal = $bdarcs->getTotal();
@@ -247,17 +260,18 @@ function baidu_savesitemap($action, $site, $type, $bdpwd, $sign)
     {
         for($i=0;$i<$pagesize;$i++)
         {
-            $cfg_plus_dir = str_replace("/", '', $cfg_plus_dir );
+            //$cfg_plus_dir = str_replace("/", '', $cfg_plus_dir );
             $indexurl = $siteurl."{$cfg_plus_dir}/baidusitemap.php?dopost=sitemap_index&type={$script}&pwd={$bdpwd}&pagesize={$i}";
             $time=time();
             $inQuery = "INSERT INTO `#@__plus_baidusitemap_list` (`url`, `type`, `create_time`, `pagesize`) VALUES ('{$indexurl}', {$type}, {$time}, {$i});";
             
             $rs = $dsql->ExecuteNoneQuery($inQuery);
-            $submiturl="http://zz.baidu.com/api/opensitemap/{$zzaction}?siteurl=".urlencode($siteurl)."&indexurl=".urlencode($indexurl)."&tokensign=".urlencode($sign)."&type=".$stype."&resource_name=".$resource_name;
-            $ret = baidu_http_send($submiturl);
         }
     }
-    $bdarcs->setSetupMaxAid();
+    if ( 1 == $type )
+    {
+        $bdarcs->setSetupMaxAid();
+    }
     return array(
         'json' => $ret,
         'url'  => $submiturl,
@@ -266,30 +280,23 @@ function baidu_savesitemap($action, $site, $type, $bdpwd, $sign)
 
 function baidu_delsitemap($site, $type=0, $sign)
 {
-    global $dsql;
-    $siteurl = $site;
+    global $dsql,$cfg_plus_dir;
+    $siteurl = baidu_get_setting('siteurl');
+    $token = baidu_get_setting('pingtoken');
+    $bdpwd = baidu_get_setting('bdpwd');
+    $sign=md5($siteurl.$token);
     $type=intval($type);
     $addWhere="";
-    if($type>0) $addWhere .= "WHERE type={$type}";
-    $query = "SELECT * FROM `#@__plus_baidusitemap_list` {$addWhere}";
-    $dsql->SetQuery($query);
-    $dsql->Execute('dd');
-    while ($row=$dsql->GetArray('dd')) {
-        $indexurl=$row['url'];
+    if($type>0){
+        $indexurl = $siteurl."{$cfg_plus_dir}/baidusitemap.php?dopost=sitemap_urls&pwd={$bdpwd}&type={$type}";
         $submiturl="http://zz.baidu.com/api/opensitemap/deletesitemap?siteurl=".urlencode($siteurl)."&indexurl=".urlencode($indexurl)."&tokensign=".urlencode($sign);
-        //var_dump($submiturl);
         $ret = baidu_http_send($submiturl);
-        
-        $delresult = json_decode($ret, true);
-        if($delresult['status']==0)
-        {
-            $delQuery="DELETE FROM `#@__plus_baidusitemap_list` WHERE `sid`={$row['sid']};";
-            $dsql->ExecuteNoneQuery($delQuery);
-            $dsql->ExecuteNoneQuery("TRUNCATE `#@__plus_baidusitemap_list`;");
-        }
-        //var_dump($delresult);
+        $delQuery="DELETE FROM `#@__plus_baidusitemap_list` WHERE `type`='{$type}';";
+        $dsql->ExecuteNoneQuery($delQuery);
+        return true;
     }
-    return true;
+    
+    return false;
 }
 
 function baidu_gen_sitemap_passwd()

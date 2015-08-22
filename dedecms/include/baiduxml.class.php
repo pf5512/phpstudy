@@ -9,7 +9,7 @@ class BaiduArticleXml {
 	var $Typeid;
 	var $ChannelID=1;
     var $Start=0;
-	var $Row=1000;
+	var $Row=500;
 	var $TypeLink;
     var $SitemapType=2;
 
@@ -24,8 +24,6 @@ class BaiduArticleXml {
 			$this->MainTable=$this->ChannelUnit->ChannelInfos['addtable'];
 		}
 	}
-    
-
 	
     function BaiduArticleXml()
     {
@@ -61,8 +59,6 @@ class BaiduArticleXml {
             $addonQuery .= "AND id>".intval($setupmaxaid);
         }
         $sql="SELECT COUNT(*) AS dd FROM `{$this->MainTable}` WHERE channel=1 {$addonQuery}";
-        //var_dump($setupmaxaid);
-        //var_dump($sql);
         $row=$dsql->GetOne($sql);
         return empty($row['dd'])? 0 : intval($row['dd']);
     }
@@ -92,7 +88,7 @@ class BaiduArticleXml {
             $addonQuery .= "AND arc.id>".intval($setupmaxaid);
         }
         $this->Start = intval($this->Start);
-		//var_dump($typeinfos);exit();
+
 		if(!empty($this->Row)) $limitQuery = "LIMIT  {$this->Start},".intval($this->Row);
 		
 		$query = "SELECT arc.*,arc.senddate AS pubdate,tp.typedir,tp.typename,tp.isdefault,tp.defaultname,tp.namerule,
@@ -100,7 +96,7 @@ class BaiduArticleXml {
 			FROM `{$this->MainTable}` arc LEFT JOIN `#@__arctype` tp ON arc.typeid=tp.id
             LEFT JOIN `#@__addonarticle` at ON arc.id=at.aid
 			WHERE arc.arcrank=0 AND arc.arcrank > -1 AND arc.channel=1 {$addonQuery} ORDER BY arc.senddate DESC {$limitQuery}";
-        //var_dump($query);
+
 		$dsql->SetQuery($query);
 		$dsql->Execute('dd');
         
@@ -113,59 +109,44 @@ class BaiduArticleXml {
 						0,$row['namerule'],$row['typedir'],0,'',$row['moresite'],$row['siteurl'],$row['sitepath']);
 
 			$row['showdate'] = Mydate('Y-m-d', $row['pubdate']);
+			$row['pubdate2'] =str_replace(' ','T',Mydate('Y-m-d H:i:s', $row['pubdate']));
 			$row['priority'] = 0;
             $row['body']=isset($row['body'])? Html2Text($row['body']) : '';
             $row['body'] = empty($row['body'])? $row['description'] : $row['body'];
-            //var_dump($row);exit;
+            $row['body']= $row['body'].' ';
+
 			if (preg_match("#c#", $row['flag'])) {
 				$row['priority'] = '1.0';
 			}
 			if(!isset($typeinfos)) $typeinfos = $this->getType($row['typeid']);
-			//var_dump($typeinfo);exit();
-			//var_dump($row);
+
             $row['source'] = trim(Html2Text($row['source']));
-            $row['title'] = baidu_strip_invalid_xml($row['title']);
-            $row['body'] = baidu_strip_invalid_xml($row['body']);
+            $row['title'] = baidu_strip_invalid_xml(str_replace(array('[',']'),'',$row['title']));
+            $row['body'] = baidu_strip_invalid_xml(str_replace(array('[',']'),'',$row['body']));
 			$addstr=$copyrightstr=$yearstr="";
 			$copyrightstr = !empty($row['source'])? "\r\n					<copyrightHolder><name><![CDATA[{$row['source']}]]></name></copyrightHolder>" : '';
-			$addstr .= empty($row['litpic'])? "" : "\r\n					<image><![CDATA[{$row['litpic']}]]></image>";
+			$addstr .= empty($row['litpic'])? "" : "\r\n					<thumbnail><![CDATA[{$cfg_basehost}{$row['litpic']}]]></thumbnail>";
 			$yearstr = Mydate('Y', $row['pubdate']);
 			$rowxmlstr = <<<EOT
-	\r\n	<url>
+\r\n		<url>
 			<loc><![CDATA[{$cfg_basehost}{$row['filename']}]]></loc>
 			<lastmod>{$row['showdate']}</lastmod>
 			<changefreq>always</changefreq>
 			<priority>{$row['priority']}</priority>
 			<data>
-				<Webpage>
-					<name><![CDATA[{$row['title']}]]></name>
-					<url><![CDATA[{$cfg_basehost}{$row['filename']}]]></url>
-					<provider>
-						<name><![CDATA[{$cfg_webname}]]></name>
-						<url><![CDATA[{$cfg_basehost}]]></url>
-					</provider>
-					<description><![CDATA[{$row['description']}]]></description>
-                    <text><![CDATA[{$row['body']}]]></text>
-                    <keywords><![CDATA[{$row['keywords']}]]></keywords>
-					<breadcrumb><![CDATA[{$typeinfos['position']}]]></breadcrumb>
+				<display>
+					<title><![CDATA[{$row['title']} ]]></title>
+					<content><![CDATA[{$row['body']}]]></content>
+					<pubTime>{$row['pubdate2']}</pubTime>
 					{$addstr}
-                    <isPartOf>
-						<name><![CDATA[{$typeinfos['typename']}]]></name>
-						<url><![CDATA[{$cfg_basehost}{$typeinfos['typelink']}]]></url>
-					</isPartOf>
-                    {$copyrightstr}
-					<copyrightYear>{$yearstr}</copyrightYear>
-				</Webpage>
+				</display>
 			</data>
 		</url>
 EOT;
             if($cfg_soft_lang=='gb2312') $rowxmlstr=gb2utf8($rowxmlstr);
-            //var_dump($rowxmlstr);exit;
             $xmlstr .= $rowxmlstr;
 		}
-        //exit($xmlstr);
 		$xmlstr .= "\r\n</urlset>";
-		//$xmldata['content'] = $xmlstr;
 		return $xmlstr;
 	}
 }

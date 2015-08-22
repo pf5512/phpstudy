@@ -297,8 +297,8 @@
 							async:true,
 							dataType:'json',
 							success:function(ajax_data){
-								$body.html(ajax_data.body);
 								$(page).find('.app-title').html(ajax_data.shorttitle);
+								$body.html(ajax_data.body);
 								//alert(w);
                                 				$(page).find("#body p img").each(function(){//如果有很多图片，我们可以使用each()遍历 
                                         				var img_w = this.width;//图片宽度 
@@ -334,9 +334,6 @@
 				};
 
 			});
-
-
-
 
 			App.controller('scroll', function (page,data) {
 				setupPageColour(page);
@@ -397,23 +394,8 @@
 			try {
 				App.restore();
 			} catch (err) {
-				App.load('viewer');
-			}
-
-
-			App.enableDragTransition();
-			try {
-				App.restore();
-			} catch (err) {
 				App.load('home');
 			}
 		</script>
-
-
-
-
-		
-
 	</body>
-
 </html>

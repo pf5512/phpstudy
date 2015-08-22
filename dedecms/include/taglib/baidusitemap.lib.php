@@ -4,17 +4,17 @@ require_once(DEDEINC."/baidusitemap.func.php");
 function lib_baidusitemap(&$ctag,&$refObj)
 {
     global $dsql, $envs;
-    //ÊôĞÔ´¦Àí
+    //å±æ€§å¤„ç†
     $attlist="type|code";
     FillAttsDefault($ctag->CAttribute->Items,$attlist);
     extract($ctag->CAttribute->Items, EXTR_SKIP);
     
     $reval="";
     
-    if( !$dsql->IsTable("#@__plus_baidusitemap_setting") ) return 'Ã»°²°Ù¶ÈÕ¾ÄÚËÑË÷Ä£¿é';
+    if( !$dsql->IsTable("#@__plus_baidusitemap_setting") ) return 'æ²¡å®‰ç™¾åº¦ç«™å†…æœç´¢æ¨¡å—';
     
     $site_id=baidu_get_setting('site_id');
-    if(empty($site_id)) return 'ÉĞÎ´°ó¶¨Õ¾µãID£¬ÇëµÇÂ¼ÏµÍ³ºóÌ¨°ó¶¨';
+    if(empty($site_id)) return 'å°šæœªç»‘å®šç«™ç‚¹IDï¼Œè¯·ç™»å½•ç³»ç»Ÿåå°ç»‘å®š';
     
     if($type=='code')
     {

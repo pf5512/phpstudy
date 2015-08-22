@@ -1,7 +1,7 @@
 <?php
 //数据库连接信息
 $cfg_dbhost = 'localhost';
-$cfg_dbname = 'dedecms';
+$cfg_dbname = 'dedecmsv57utf8sp1';
 $cfg_dbuser = 'root';
 $cfg_dbpwd = '123456';
 $cfg_dbprefix = 'dede_';
