@@ -1,0 +1,106 @@
+<div class="app-page" data-page="home">
+
+			<div class="app-topbar">
+
+				<div class="app-title"><span class="app-icon"></span><?=$cfg_webname?></div>
+
+			</div>
+
+			
+
+
+
+
+			<div class="app-content">
+
+				<div class="WSCSlideWrapper" id="WSCSlideWrapper" >
+
+					<div>
+
+						<script src='http://beta.raoping.com/plus/ad_js.php?aid=14' language='javascript'></script>
+
+				      		<script src='http://beta.raoping.com/plus/ad_js.php?aid=13' language='javascript'></script>
+
+						<script src='http://beta.raoping.com/plus/ad_js.php?aid=12' language='javascript'></script>
+
+						<script src='http://beta.raoping.com/plus/ad_js.php?aid=11' language='javascript'></script>
+
+					</div>
+
+				</div>
+
+				<div class="app-section">
+
+					<ul class="app-list">
+
+						<?php 
+
+							foreach($arc_list as $arr_type)
+
+							{
+
+								$arc_arr=$arr_type->arc;
+
+								if($arc_arr==NULL) continue;
+
+								echo '<label class="app-button" data-target="scroll" 
+								data-target-args=\'{"typeid":'.$arr_type->id.',"typename":"'.$arr_type->typename.'","chid":"'.$arr_type->channeltype.'"}\'><b>'.$arr_type->typename.'</b></label>';
+
+								foreach($arc_arr as $arr)
+
+								{
+
+									echo '<li class="app-button" data-target="detail" data-target-args=\'{"aid":'.$arr->id.'}\'>'.$arr->shorttitle.
+									'</li>';
+
+								}
+
+							}
+
+						?>
+
+						<?php 
+							foreach($pic_list as $pic_type)
+
+							{
+
+								$pic_arr=$pic_type->pics;
+
+								if($pic_arr==NULL) continue;
+
+								echo '<label class="app-button" data-target="scroll" data-target-args=\'{"typeid":'.$pic_type->id.',"typename":"'.$pic_type->typename.'","chid":"'.$pic_type->channeltype.'"}\'><b>'.$pic_type->typename.'</b></label>';
+
+								foreach($pic_arr as $pic)
+
+								{
+
+									echo '<li class="app-button" data-target="viewer" data-target-args=\'{"aid":'.$pic->id.'}\'>'.$pic->shorttitle.
+									'</li>';
+
+								}
+
+							}
+
+						?>
+
+					</ul>
+
+				</div>
+
+				<script type="text/javascript">
+
+				$(document).ready(function(){
+
+				     $('.WSCSlideWrapper').height(window.screen.height);
+
+				     $('.WSCSlideWrapper').touchslide({timecontrol:3000,animatetime:300,direction:'left',navshow:true,canvassuport:true});
+
+				});
+
+				</script>
+
+				
+
+			</div>
+
+		</div>
