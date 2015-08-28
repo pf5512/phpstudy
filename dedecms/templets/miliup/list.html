@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- saved from url=(0066)http://www.miliup.com/pro/product-list.php?type=%CD%F8%D5%BE_1_1_1 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=7">
+
+<meta name="description" content="{dede:global.cfg_description/}">
+<link rel="stylesheet" type="text/css" href="{dede:global.cfg_templeturl/}/miliup/css/all-classify-page.css">
+<link rel="stylesheet" type="text/css" href="{dede:global.cfg_templeturl/}/miliup/css/logo-navi.css">
+<link rel="stylesheet" type="text/css" href="{dede:global.cfg_templeturl/}/miliup/css/buttom-navi.css">
+<title>{dede:global.cfg_webname/}</title>
+</head>
+
+	<body>
+		{dede:include filename="../miliup/header.html"/}
+		<img class="pro-banner1" alt="" src="{dede:global.cfg_templeturl/}/miliup/images/banner.jpg"/>
+		<div id="pro-all">
+			<div id="pro-navi"> 
+				{dede:channelartlist typeid='8,35'}
+					{dede:type}<a class="pro-navi-1" href="[field:typelink/]"> &nbsp; [field:typename/]+ </a>{/dede:type}
+					<img class="pro-navi-jiange" alt="" src="{dede:global.cfg_templeturl/}/miliup/images/pro-navi-jiange.jpg"/>
+					{dede:channel type='son' noself='yes'}
+						<a class="pro-navi-2" href="[field:typelink/]">[field:typename/]</a>
+					{/dede:channel}
+				{/dede:channelartlist}
+			</div>
+			<div id="pro-line">
+				<img class="pro-line-img" alt="" src="{dede:global.cfg_templeturl/}/miliup/images/pro-line.jpg"/>
+			</div>
+			<div id="pro-content"> 
+				<div id="frameContent">  
+					<div id="inside">
+					{dede:list pagesize='10'}
+						<!--<li> [field:array runphp='yes']@me = (empty(@me['litpic']) ? "" : "<a href='{@me['arcurl']}' class='preview'><img src='{@me['litpic']}'/></a>"); [/field:array]
+					 [<b>[field:typelink/]</b>] <a href="[field:arcurl/]" class="title">[field:title/]</a> <span class="info"> <small>日期：</small>[field:pubdate function="GetDateTimeMK(@me)"/] <small>点击：</small>[field:click/] <small>好评：</small>[field:scores/] </span>
+					 <p class="intro"> [field:description/]... </p>
+					</li>-->
+						<div class="anli-list">
+							
+							<a target="_blank" href="[field:arcurl/]">
+								<img class="anli-img" alt="" src="[field:litpic/]">  
+							</a>
+							<span class="anli-word">[field:title/]</span>
+						</div>
+					{/dede:list}        
+					</div> 
+				</div>
+				<ul id="pages" style="font-size:12px;color:black;list-style:none">{dede:pagelist listitem="info,index,end,pre,next,pageno" listsize="5"/}</ul>
+		   </div>
+		</div>
+		{dede:include filename="../miliup/footer.html"/}
+	</body>
+</html>

@@ -1,0 +1,143 @@
+@CHARSET "UTF-8";
+.logo-navi-all{
+display:block;
+padding:0;
+width:1200px;
+height:186px;
+margin:0 auto;
+}
+
+/*logo+导航模块，定义模块居中  */
+.head{
+display:block;
+float:left;
+width:1200px; 
+height:65px;
+margin-top:55px;
+overflow:hidden;
+}
+
+/*logo模块，定义htm模块高度  */
+.logo{
+display:block;
+clear:left;
+width:208px; /*动态定义htm模块/logo的宽度 */
+height:65px;/*动态定义htm模块/logo的一致高度 */
+float:left;
+margin-left:0px;
+}
+
+/*logo模块，定义htm模块高度  */
+.navi-all{
+display:block;
+width:auto;
+height:65px;
+float:left;
+margin-left:10px;
+color:black;
+font-family:Microsoft Yahei;
+}
+.navi-all a:hover {
+color:#949599;
+}
+#navi0{
+float:left;
+margin-left:160px;
+}
+
+.navi-beside{
+width:5px;
+height:65px;
+float:left;
+margin-left:10px;
+}
+
+.navi-all-up{
+display:block;
+width:auto;
+height:16px;
+line-height:16x;
+float:left;
+margin-top:13px;
+color:black;
+font-size:16px;
+font-weight:bold;
+font-family:Microsoft Yahei;
+}
+
+.navi-all-down{
+display:block;
+width:auto;
+height:18px;
+line-height:18x;
+clear:left;
+float:left;
+margin-top:2px;
+color:black;
+font-size:9px;
+font-family:Microsoft Yahei;
+}
+
+#up-banner{
+float:left;
+display:block;
+width:1200px;
+height:6px;
+}
+
+#up-banner-img{
+float:left;
+display:block;
+width:1200px;
+height:6px;
+}
+
+#s-head{
+float:left;
+display:block;
+width:1200px;
+height:45px;
+margin-top:6px;
+}
+
+#s-head-1{
+display:block;
+width:810px;
+height:45px;
+float:left;
+margin-left:1px;
+background-color:#e7e8ea;
+}
+
+.s-head-1-a{
+float:left;
+display:block;
+color:black;
+font-size:14px;
+line-height:45px;
+font-family:Microsoft Yahei;
+	
+}
+
+.s-head-1-a:hover{
+	background-color:#d1d2d4;
+}
+
+#s-head-2{
+display:block;
+width:386px;
+height:45px;
+float:left;
+margin-left:2px;
+background: url(../images/s-head-2-back.jpg) repeat;
+}
+
+#s-head-2-word{
+	margin-left:168px;
+	height:45px;
+	font-size:16px;
+	color:white;
+    line-height:45px;
+    font-family:Microsoft Yahei;
+}
+ 

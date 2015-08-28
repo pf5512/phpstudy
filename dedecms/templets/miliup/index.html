@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- saved from url=(0022)http://www.miliup.com/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=7">
+
+<meta name="description" content="米立">
+<link rel="stylesheet" type="text/css" href="{dede:global.cfg_templeturl/}/miliup/css/pro.css">
+<link rel="stylesheet" type="text/css" href="{dede:global.cfg_templeturl/}/miliup/css/img-change.css">
+<link rel="stylesheet" type="text/css" href="{dede:global.cfg_templeturl/}/miliup/css/logo-navi.css">
+<link rel="stylesheet" type="text/css" href="{dede:global.cfg_templeturl/}/miliup/css/buttom-navi.css">
+<title>{dede:global.cfg_webname/}</title>
+</head>
+
+<body>
+
+	{dede:include filename="../miliup/header.html" /}
+
+	<div id="album">
+		<div id="album-inside">
+			<script src='/plus/ad_js.php?aid=1' language='javascript'></script>
+			<script src='/plus/ad_js.php?aid=2' language='javascript'></script>
+		</div>
+		<div id="album-dd">
+			<a href="http://www.miliup.com/#index1"></a><a href="http://www.miliup.com/#index2"></a><a href="http://www.miliup.com/#index3"></a><a href="http://www.miliup.com/#index4"></a><a href="http://www.miliup.com/#index5"></a><a href="http://www.miliup.com/#index6"></a>
+		</div>
+	</div>
+	<div id="down-banner">
+		<img id="down-banner-insede" alt="" src="{dede:global.cfg_templeturl/}/miliup/images/down-banner.jpg"/>
+	</div>
+  
+ 
+  
+
+	{dede:include filename="../miliup/footer.html" /}
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+  function imageRotater(id){
+    var cases = "",
+    album = document.getElementById(id),
+    images = album.getElementsByTagName("img"),
+    links = album.getElementsByTagName("a"),
+    length = images.length,
+    aIndex = 1,
+    aBefore = length;
+    for(var i=0;i< length;i++){
+      cases += images[i].id + ':"'+images[i].getAttribute("src")+'",'
+    }
+    images[0].style.cssText = "position:absolute;top:0;left:0;";//修正图片的位置错误问题
+    cases = eval("({"+cases.replace(/,$/,"")+"})"); //相当于switch-case代码块
+    for(var i=0;i<length;i++){ //实现点击切换图片
+      links[i].onclick = function(e){
+        e =e || window.event;
+        var index = this.toString().split("#")[1];
+        aIndex = index.substr(-1);
+        images[0].src = cases[index];
+          !+"\v1" ?(e.returnValue = false) :(e.preventDefault());
+      }
+    }
+    (function(){//实现自动轮换图片
+      setTimeout(function(){
+        if(aIndex > length){
+          aIndex = 1;
+        }
+        images[0].src = cases["index"+aIndex];
+        links[aBefore-1].className = "";
+        links[aIndex-1].className = "hover";
+        aBefore = aIndex;
+        aIndex++;
+        setTimeout(arguments.callee,2500)
+      },1500)
+    })()
+  }
+  window.onload = function(){
+    try{document.execCommand("BackgroundImageCache", false, true);}catch(e){};
+    imageRotater("album");
+  }
+</script>
+</body></html>

@@ -1,0 +1,152 @@
+@CHARSET "UTF-8";
+
+* { margin:0; padding:0;   }
+img { border:none; }
+body a{border:none;}
+ 
+a:{text-decoration: none;}
+a:link {text-decoration: none;}
+a:visited {text-decoration: none;}
+a:active {text-decoration: none;}/*消除链接默认样式*/
+
+
+.new-buttom{
+clear:left;
+display:block;
+width:1200px;
+height:auto;
+margin: 0 auto;
+}
+	
+#down-banner11{
+float:left;
+display:block;
+width:1200px;
+height:6px;
+}
+
+#down-banner-img11{
+display:block;
+width:1169px;
+height:3px;
+margin:0 auto;
+}
+.buttom-navi-up11{
+display:block;
+clear:left;
+float:left;
+width:1200px; 
+height:183px;
+margin-top:35px;
+}
+
+/*logo+导航模块，定义模块居中  */
+.buttom-navi1314{
+display:block;
+width:1004px; 
+height:183px;
+margin:0 auto;
+}
+
+
+/*logo模块，定义htm模块高度  */
+.buttom-navi-all11{
+display:block;
+width:154px;
+height:183px;
+float:left;
+color:#444444;
+font-family:Microsoft Yahei;
+}
+
+
+.buttom-navi-all a:hover {
+    color:black;
+}
+
+#buttom-navi-all-1{
+float:left;
+margin-left:10px;
+}
+
+.buttom-navi-bigword{
+display:block;
+width:42px;
+height:45px;
+line-height:48px;
+float:left;
+font-family:Arial;
+font-size:44px;
+color:#444444;
+}
+
+
+.buttom-navi-tittle{
+display:block;
+width:83px;
+height:45px;
+float:left;
+margin-left:10px;
+line-height:15px;
+color:#444444;
+font-size:11px;
+}
+
+.buttom-navi-reflect{
+display:block;
+width:128px;
+height:28px;
+clear:left;
+float:left;
+margin-left:2px;
+
+}
+
+.buttom-navi-snavi{
+display:block;
+width:150px;
+height:20px;
+line-height:20px;
+clear:left;
+float:left;
+margin-left:2px;
+color:#444444;
+font-size:12px;
+}
+
+.buttom-navi-beside{
+display:block;
+width:4px;
+height:183px;
+float:left;
+}
+.
+.copy-right{
+display:block;
+clear:left;
+float:left;
+display:block;
+width:1200px;
+height:15px;
+}
+
+.copy-right1{
+display:block;
+clear:left;
+float:left;
+display:block;
+width:1200px;
+height:15px;
+margin-top:200px;
+}
+
+.copy-right-word{
+display:block;
+width:1200px;
+height:25px;
+float:left;
+line-height:25px;
+font-family:Microsoft Yahei;
+font-size:10px;
+text-align:center;
+}
