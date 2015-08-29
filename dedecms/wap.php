@@ -34,8 +34,8 @@
 		
 		$arc_list=array();
 		while($row=$dsql->GetObject())
-                {                       
-                        array_push($arc_list,$row);
+        {                       
+            array_push($arc_list,$row);
                 }
 		
 		foreach($arc_list as $arc)
