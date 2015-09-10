@@ -6,12 +6,10 @@ username = "root"
 password = 123456
 dbname = "piwik"
 tables_prefix = "piwik_"
-adapter = "MYSQLI"
 
 [General]
-salt = "5bd863f0c69bb4d7c8eb7f1435ac012c"
-trusted_hosts[] = "piwik.com"
-trusted_hosts[] = "example.org"
+salt = "138f8a547e56b4b47bc0bcc009e9d24e"
+trusted_hosts[] = "pikit.com"
 
 [PluginsInstalled]
 PluginsInstalled[] = "Diagnostics"
