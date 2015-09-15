@@ -7,13 +7,13 @@
         <title>Article component - UIkit documentation</title>
         <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
         <link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon.png">
-        <link id="data-uikit-theme" rel="stylesheet" href="docs/css/uikit.docs.min.css">
-        <link rel="stylesheet" href="docs/css/docs.css">
-        <link rel="stylesheet" href="vendor/highlight/highlight.css">
-        <script src="vendor/jquery.js"></script>
-        <script src="docs/js/uikit.min.js"></script>
-        <script src="docs/vendor/highlight/highlight.js"></script>
-        <script src="docs/js/docs.js"></script>
+        <link id="data-uikit-theme" rel="stylesheet" href="{dede:global.cfg_templets_skin/}/docs/css/uikit.docs.min.css">
+        <link rel="stylesheet" href="{dede:global.cfg_templets_skin/}/docs/css/docs.css">
+        <link rel="stylesheet" href="{dede:global.cfg_templets_skin/}/vendor/highlight/highlight.css">
+        <script src="{dede:global.cfg_templets_skin/}/vendor/jquery.js"></script>
+        <script src="{dede:global.cfg_templets_skin/}/docs/js/uikit.min.js"></script>
+        <script src="{dede:global.cfg_templets_skin/}/docs/vendor/highlight/highlight.js"></script>
+        <script src="{dede:global.cfg_templets_skin/}/docs/js/docs.js"></script>
     </head>
 
     <body class="tm-background">
@@ -255,6 +255,21 @@
             </div>
 
         </div>
+		<!-- Piwik -->
+		<script type="text/javascript">
+		  var _paq = _paq || [];
+		  _paq.push(['trackPageView']);
+		  _paq.push(['enableLinkTracking']);
+		  (function() {
+			var u="http://pikit.com/";
+			_paq.push(['setTrackerUrl', u+'piwik.php']);
+			_paq.push(['setSiteId', 1]);
+			var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+			g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+		  })();
+		</script>
+		<noscript><p><img src="http://pikit.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+		<!-- End Piwik Code -->
 
     </body>
 </html>
