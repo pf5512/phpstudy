@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en-gb" dir="ltr">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{dede:field.title/}_{dede:global.cfg_webname/}</title>
+        <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+        <link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon.png">
+        <link id="data-uikit-theme" rel="stylesheet" href="{dede:global.cfg_templeturl/}/byciclefan/docs/css/uikit.docs.min.css">
+        <link rel="stylesheet" href="{dede:global.cfg_templeturl/}/byciclefan/docs/css/docs.css">
+        <link rel="stylesheet" href="{dede:global.cfg_templeturl/}/byciclefan/vendor/highlight/highlight.css">
+        <script src="{dede:global.cfg_templeturl/}/byciclefan/vendor/jquery.js"></script>
+        <script src="{dede:global.cfg_templeturl/}/byciclefan/docs/js/uikit.min.js"></script>
+        <script src="{dede:global.cfg_templeturl/}/byciclefan/docs/vendor/highlight/highlight.js"></script>
+        <script src="{dede:global.cfg_templeturl/}/byciclefan/docs/js/docs.js"></script>
+		
+		<script src="{dede:global.cfg_templeturl/}/byciclefan/src/js/components/slideshow.js"></script>
+        <script src="{dede:global.cfg_templeturl/}/byciclefan/src/js/components/slideshow-fx.js"></script>
+    </head>
+
+    <body class="tm-background">
+
+        {dede:include filename="head.htm"/}
+
+        <div class="tm-middle">
+            <div class="uk-container uk-container-center">
+				<ul class="uk-slideshow" data-uk-slideshow="{autoplay:true}">
+                    <li><img src="images/placeholder_800x400_1.jpg" width="800" height="400" alt=""></li>
+                    <li><img src="images/placeholder_800x400_2.jpg" width="800" height="400" alt=""></li>
+                    <li><img src="images/placeholder_800x400_3.jpg" width="800" height="400" alt=""></li>
+                </ul>
+                <div class="uk-grid" data-uk-grid-margin>
+                    {dede:include filename="sidebar.htm"/}
+                    <div class="tm-main uk-width-medium-3-4">
+                        <article class="uk-article">
+							<h3 class="tm-article-subtitle">{dede:field.title/}</h3>
+                            <hr class="uk-article-divider">
+                            <ul class="uk-list uk-list-striped">
+								{dede:list pagesize='10'}
+								<li><a href="[field:arcurl/]" class="title">[field:title/]</a> <small>日期：</small>[field:pubdate function="GetDateTimeMK(@me)"/]</li>
+								{/dede:list}
+                            </ul>
+                        </article>
+
+                    </div>
+                </div>
+				
+				
+				<ul class="uk-pagination uk-pagination-right">
+                    {dede:pagelist listitem="info,index,end,pre,next,pageno" listsize="5"/}
+                </ul>
+
+            </div>
+        </div>
+        {dede:include filename="footer.htm"/}
+        {dede:include filename="mbmenu.htm"/}
+    </body>
+</html>

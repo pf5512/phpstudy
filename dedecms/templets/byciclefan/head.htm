@@ -1,0 +1,15 @@
+<nav class="tm-navbar uk-navbar uk-navbar-attached">
+    <div class="uk-container uk-container-center">
+        <a class="uk-navbar-brand uk-hidden-small" href='{dede:global.cfg_cmsurl/}/'>
+			<img class="uk-margin uk-margin-remove" src="{dede:global.cfg_templeturl/}/byciclefan/images/logo_uikit.svg" width="90" height="30" title="UIkit" alt="UIkit"/>
+		</a>
+        <ul class="uk-navbar-nav uk-hidden-small">
+			<li><a href='{dede:global.cfg_cmsurl/}/'><span>主页</span></a></li>
+			{dede:channel type='top' row='10' currentstyle="<li class='hover'><a href='~typelink~' ~rel~><span>~typename~</span></a></li>"}
+			<li><a href='[field:typeurl/]' [field:rel/]><span>[field:typename/]</span></a></li>
+			{/dede:channel}
+        </ul>
+        <a href="#tm-offcanvas" class="uk-navbar-toggle uk-visible-small" data-uk-offcanvas></a>
+        <div class="uk-navbar-brand uk-navbar-center uk-visible-small"><img src="{dede:global.cfg_templeturl/}/byciclefan/images/logo_uikit.svg" width="90" height="30" title="UIkit" alt="UIkit"></div>
+    </div>
+</nav>

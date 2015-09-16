@@ -1,0 +1,12 @@
+<div class="tm-sidebar uk-width-medium-1-4 uk-hidden-small">
+    <ul class="tm-nav uk-nav" data-uk-nav>
+		{dede:channelartlist typeid='1'}
+		{dede:type}<li class="uk-nav-header"><a href='[field:typelink/]'>[field:typename/]</a></li>{/dede:type}
+		<ul>
+			{dede:channel type='son' noself='yes'}
+			<li><a href='[field:typelink/]'>[field:typename/]</a></li>
+			{/dede:channel}
+		</ul>
+		{/dede:channelartlist}
+    </ul>
+</div>
