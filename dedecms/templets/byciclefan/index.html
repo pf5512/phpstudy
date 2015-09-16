@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Article component - UIkit documentation</title>
+        <title>{dede:global.cfg_webname/}</title>
         <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
         <link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon.png">
         <link id="data-uikit-theme" rel="stylesheet" href="{dede:global.cfg_templeturl/}/byciclefan/docs/css/uikit.docs.min.css">
@@ -20,29 +20,15 @@
     </head>
 
     <body class="tm-background">
-        <nav class="tm-navbar uk-navbar uk-navbar-attached">
-            <div class="uk-container uk-container-center">
-                <a class="uk-navbar-brand uk-hidden-small" href="index.html"><img class="uk-margin uk-margin-remove" src="docs/images/logo_uikit.svg" width="90" height="30" title="UIkit" alt="UIkit"></a>
-                <ul class="uk-navbar-nav uk-hidden-small">
-                    <li><a href="docs/documentation_get-started.html">Get Started</a></li>
-                    <li><a href="docs/core.html">Core</a></li>
-                    <li><a href="docs/components.html">Components</a></li>
-                    <li><a href="docs/customizer.html">Customizer</a></li>
-                    <li><a href="showcase/index.html">Showcase</a></li>
-                    <li><a href="tutorials.html">Tutorials</a></li>
-                </ul>
-                <a href="#tm-offcanvas" class="uk-navbar-toggle uk-visible-small" data-uk-offcanvas></a>
-                <div class="uk-navbar-brand uk-navbar-center uk-visible-small"><img src="docs/images/logo_uikit.svg" width="90" height="30" title="UIkit" alt="UIkit"></div>
-            </div>
-        </nav>
+        {dede:include filename="head.htm"/}
 
 		<div class="tm-middle">
             <div class="uk-container uk-container-center">
                 <div class="uk-slidenav-position" data-uk-slideshow>
                     <ul class="uk-slideshow">
-                        <li><img src="images/placeholder_800x400_1.jpg" width="800" height="400" alt=""/></li>
-                        <li><img src="images/placeholder_800x400_2.jpg" width="800" height="400" alt=""/></li>
-                        <li><img src="images/placeholder_800x400_3.jpg" width="800" height="400" alt=""/></li>
+                        <li><img src="{dede:global.cfg_templeturl/}/byciclefan/images/placeholder_800x400_1.jpg" width="800" height="400" alt=""/></li>
+                        <li><img src="{dede:global.cfg_templeturl/}/byciclefan/images/placeholder_800x400_2.jpg" width="800" height="400" alt=""/></li>
+                        <li><img src="{dede:global.cfg_templeturl/}/byciclefan/images/placeholder_800x400_3.jpg" width="800" height="400" alt=""/></li>
                     </ul>
                     <a href="#" class="uk-slidenav uk-slidenav-contrast uk-slidenav-previous" data-uk-slideshow-item="previous" style="color: rgba(255,255,255,0.4)"></a>
                     <a href="#" class="uk-slidenav uk-slidenav-contrast uk-slidenav-next" data-uk-slideshow-item="next" style="color: rgba(255,255,255,0.4)"></a>
@@ -77,69 +63,22 @@
             </div>
         </div>
 
-        <div id="tm-offcanvas" class="uk-offcanvas">
-            <div class="uk-offcanvas-bar">
-                <ul class="uk-nav uk-nav-offcanvas uk-nav-parent-icon" data-uk-nav="{ multiple: true }">
-                    <li class="uk-parent">
-						<a href="#">Documentation</a>
-                        <ul class="uk-nav-sub">
-                            <li><a href="docs/documentation_get-started.html">Get started</a></li>
-                            <li><a href="docs/documentation_how-to-customize.html">How to customize</a></li>
-                            <li><a href="docs/documentation_layouts.html">Layout examples</a></li>
-                            <li><a href="docs/core.html">Core</a></li>
-                            <li><a href="docs/components.html">Components</a></li>
-                            <li><a href="docs/documentation_project-structure.html">Project structure</a></li>
-                            <li><a href="documentation_less-sass.html">Less &amp; Sass files</a></li>
-                            <li><a href="docs/documentation_create-a-theme.html">Create a theme</a></li>
-                            <li><a href="docs/documentation_create-a-style.html">Create a style</a></li>
-                            <li><a href="docs/documentation_customizer-json.html">Customizer.json</a></li>
-                            <li><a href="docs/documentation_javascript.html">Javascript</a></li>
-                            <li><a href="docs/documentation_custom-prefix.html">Custom prefix</a></li>
-                        </ul>
-                    </li>
-                    <li class="uk-nav-header">Core</li>
-                    <li class="uk-parent"><a href="#"><i class="uk-icon-wrench"></i> Defaults</a>
-                        <ul class="uk-nav-sub">
-                            <li><a href="docs/base.html">Base</a></li>
-                            <li><a href="docs/print.html">Print</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-		
-		<div class="tm-footer">
-            <div class="uk-container uk-container-center uk-text-center">
-                <ul class="uk-subnav uk-subnav-line uk-flex-center">
-                    <li><a href="https://github.com/uikit/uikit">GitHub</a></li>
-                    <li><a href="https://github.com/uikit/uikit/issues">Issues</a></li>
-                    <li><a href="https://github.com/uikit/uikit/blob/master/CHANGELOG.md">Changelog</a></li>
-                    <li><a href="https://twitter.com/getuikit">Twitter</a></li>
-                </ul>
-                <div class="uk-panel">
-                    <p>Made by <a href="http://www.yootheme.com">YOOtheme</a> with love and caffeine.<br class="uk-hidden-small">Licensed under <a href="http://opensource.org/licenses/MIT">MIT license</a>.</p>
-                    <a href="index.html"><img src="docs/images/logo_uikit.svg" width="90" height="30" title="UIkit" alt="UIkit"></a>
-                </div>
-            </div>
-        </div>
-        <script>
-
-            $.ajax({
-                dataType : "jsonp",
-                url      : "https://api.github.com/repos/uikit/uikit?callback=ukghapi&nocache="+Math.random(),
-                success  : function(data){
-
-                    if(!data) return;
-
-                    if(data.data.watchers){
-                        $("[data-uikit-stargazers]").html(data.data.watchers);
-                    }
-
-                    if(data.data.forks){
-                        $("[data-uikit-forks]").html(data.data.forks);
-                    }
-                }
-            });
-        </script>
+        {dede:include filename="footer.htm"/}
+        {dede:include filename="mbmenu.htm"/}
+        <!-- Piwik -->
+		<script type="text/javascript">
+		  var _paq = _paq || [];
+		  _paq.push(['trackPageView']);
+		  _paq.push(['enableLinkTracking']);
+		  (function() {
+			var u="http://pikit.com/";
+			_paq.push(['setTrackerUrl', u+'piwik.php']);
+			_paq.push(['setSiteId', 1]);
+			var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+			g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+		  })();
+		</script>
+		<noscript><p><img src="http://pikit.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+		<!-- End Piwik Code -->
     </body>
 </html>

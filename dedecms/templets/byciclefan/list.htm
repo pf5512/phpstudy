@@ -25,11 +25,6 @@
 
         <div class="tm-middle">
             <div class="uk-container uk-container-center">
-				<ul class="uk-slideshow" data-uk-slideshow="{autoplay:true}">
-                    <li><img src="images/placeholder_800x400_1.jpg" width="800" height="400" alt=""></li>
-                    <li><img src="images/placeholder_800x400_2.jpg" width="800" height="400" alt=""></li>
-                    <li><img src="images/placeholder_800x400_3.jpg" width="800" height="400" alt=""></li>
-                </ul>
                 <div class="uk-grid" data-uk-grid-margin>
                     {dede:include filename="sidebar.htm"/}
                     <div class="tm-main uk-width-medium-3-4">
@@ -42,11 +37,8 @@
 								{/dede:list}
                             </ul>
                         </article>
-
                     </div>
-                </div>
-				
-				
+                </div> 
 				<ul class="uk-pagination uk-pagination-right">
                     {dede:pagelist listitem="info,index,end,pre,next,pageno" listsize="5"/}
                 </ul>
@@ -55,5 +47,20 @@
         </div>
         {dede:include filename="footer.htm"/}
         {dede:include filename="mbmenu.htm"/}
+		<!-- Piwik -->
+		<script type="text/javascript">
+		  var _paq = _paq || [];
+		  _paq.push(['trackPageView']);
+		  _paq.push(['enableLinkTracking']);
+		  (function() {
+			var u="http://pikit.com/";
+			_paq.push(['setTrackerUrl', u+'piwik.php']);
+			_paq.push(['setSiteId', 1]);
+			var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+			g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+		  })();
+		</script>
+		<noscript><p><img src="http://pikit.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+		<!-- End Piwik Code -->
     </body>
 </html>
