@@ -76,4 +76,17 @@ class CommonController extends Controller {
         else
             $this->error('发送失败');
 	}
+	
+	 protected function filter_word($value){
+        $word = F('word','','./Public/Cache/');
+        if(!$word){
+        	$word=M('word')->select(); 
+        }
+        $val = $value;
+        foreach($word as $item){
+            $count = mb_strlen($item['word'],'utf8');
+            $val = str_replace($item['word'],str_repeat('*',$count),$val);   //将非法词汇，提出成星号*
+        }
+        return $val;
+    }
 }

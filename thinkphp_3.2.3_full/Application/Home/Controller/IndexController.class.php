@@ -2,6 +2,8 @@
 namespace Home\Controller;
 use Think\Controller;
 use Libiary\Vendor\Mail;
+use Org\Net\HttpCurl;
+use Common\Pinyin;
 class IndexController extends Controller {
     public function index(){
 		C("index","index");
@@ -19,8 +21,45 @@ class IndexController extends Controller {
 	public function index3()
 	{  
         if(SendMail("15521109628@163.com","测试邮件。","测试内容。"))
-            $this->success('发送成功！');
+            $this->success('发送成功');
         else
             $this->error('发送失败');
+	}
+	
+	public function mail()
+	{
+		if(IS_POST)
+		{
+			$title=I("title","UnkownTitle","strip_tags");
+			$content=I("content","Nocontent","strip_tags");
+			$reveiver=I("receiver","yingjiechen@live.cn","strip_tags");
+			
+			SendMail($reveiver,$title,$content);
+			$this->success("发送成功","/index.php/Index/mail");
+			
+		}
+		else
+		{
+			$this->display();
+		}
+	}
+	
+	public function processBar()
+	{
+		// 实例化Download对象
+		$down = new \Common\Util\Http\Download(function($completed, $total, $percentage){
+		   echo $completed .'/' .$total, ' ', $percentage .'%', '<br>';
+		 });
+		$down->begin('http://yinyueshiting.baidu.com/data2/music/18605547/18605122122400128.mp3?xcode=c146fc657557302808a65907a49a17b0', 'demo.mp3');
+
+	}
+	
+	public function Pinyin()
+	{
+		import("ORG.Util.Pinyin");
+		$py = new \org\util\PinYin();
+		echo $py->getAllPY("输出汉字所有拼音"); //shuchuhanzisuoyoupinyin
+		echo $py->getFirstPY("输出汉字首拼音"); //schzspy
+
 	}
 }

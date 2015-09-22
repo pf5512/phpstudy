@@ -156,7 +156,6 @@
  */
 
     class QRtools {
-    
         //----------------------------------------------------------------------
         public static function binarize($frame)
         {
