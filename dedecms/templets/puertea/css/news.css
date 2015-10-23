@@ -1,0 +1,13 @@
+@charset "utf-8";
+/* CSS Document */
+.main-content{ height:550px;}
+#changpage{ float:right; margin-top:50px;}
+.product-list{padding-left:10px; float:left; width:700px; height:570px; position:relative; margin-left:25px;}
+
+.products{ background:none repeat scroll 0% 0% #B2B662;}
+.line{ left:-15px; height:510px;}
+
+#changpage{ float:right; position:absolute; right:0; bottom:0; font-size:12px;}
+.list{ width:100%;}
+#www_zzjs_net{ float:left; width:600px; font-size:14px; line-height:3em}
+.time{ padding:0 30px; color:#7e462f}

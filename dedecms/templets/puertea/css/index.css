@@ -1,0 +1,26 @@
+@charset "utf-8";/* CSS Document*/.banner{height: 600px;background: #b18956;}
+.banner-box{width: 1005px;}
+.info{background: #b18956;height: 230px;}
+.infobox{margin: 0 auto;width: 1005px;}
+.intro{width: 230px;height: 70%;float: left;border-right: #c8a063 1px solid;margin-top: 69px;}
+.Products{width: 526px;margin-left: 2px;float: left;height: 70%;border-right: #c8a063 1px solid;margin-top: 69px;padding-left: 14px;}
+.contact{width: 206px;margin-left: 3px;height: 70%;float: left;margin-top: 69px;padding-left: 14px;}
+.title{margin-top: -23px;}
+.content{padding-left: 20px;padding-right: 20px;line-height: 20px;font-size: 12px;}
+.more{float: right;font-size: 13px;line-height: 3em;margin-right: 50px;color: #000;text-decoration: none;}
+#inner{width: 100%;overflow: hidden;position: relative;}
+#carousel div{background: #fff;width: 135px;height: 135px;float: left;margin: 0 5px;}
+#pager{text-align: center;margin-top: 20px;color: #666;}
+#pager a{color: #666;text-decoration: none;display: inline-block;padding: 5px 10px;}
+#pager a: hover{color: #333;}
+#pager a.selected{background-color: #333;color: #ccc;}
+#prev, #next{display: block;width: 50px;height: 80px;margin-top: -40px;position: absolute;top: 50%;z-index: 2;}
+#prev{background: url( ../images/ui-prev.png ) no-repeat center;}
+#next{background: url( ../images/ui-next.png ) no-repeat center;}
+#copy{text-align: center;width: 100%;position: absolute;bottom: 10px;left: 0;}
+#copy, #copy a{color: #999;}
+#donate-spacer{height: 100%;}
+#donate{width: 750px;padding: 50px 75px;margin: 0 auto;overflow: hidden;}
+#donate p, #donate form{margin: 0;float: left;}
+#donate p{width: 650px;}
+#donate form{width: 100px;}

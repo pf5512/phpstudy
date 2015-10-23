@@ -1,0 +1,9 @@
+@charset "utf-8";
+/* CSS Document */
+.products{ background:none repeat scroll 0% 0% #B2B662;}
+.product-list{padding-left:40px; float: left; width:700px;}
+#changpage{ float:right}
+.main-content{ min-height:300px;}
+
+.product-list{padding-left:10px; float:left; width:700px;position:relative; margin-left:25px;}
+.line{ left:-15px}

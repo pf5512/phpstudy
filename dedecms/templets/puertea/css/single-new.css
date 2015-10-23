@@ -1,0 +1,9 @@
+@charset "utf-8";
+/* CSS Document */
+.products{ background:none repeat scroll 0% 0% #B2B662;}
+.title{ color: #FFF; font-size:20px; margin-top:20px;}
+.time{ font-size:12px; color:#FFF;}
+.picture{ width:780px; height:auto;}
+
+.product-list{padding-left:10px; float:left; width:700px; height:100%; position:relative; margin-left:25px;}
+.line{ left:-15px}

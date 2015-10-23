@@ -1,0 +1,44 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>{dede:global.cfg_webname/}</title>
+		<link href="{dede:global.cfg_templeturl/}/{dede:global.cfg_df_style/}/css/public.css" rel="stylesheet" type="text/css">
+		<link href="{dede:global.cfg_templeturl/}/{dede:global.cfg_df_style/}/css/menu.css" rel="stylesheet" type="text/css">
+		<link href="{dede:global.cfg_templeturl/}/{dede:global.cfg_df_style/}/css/about.css" rel="stylesheet" type="text/css">
+		<script src="{dede:global.cfg_templeturl/}/{dede:global.cfg_df_style/}/js/jquery.js"></script>
+		<script src="{dede:global.cfg_templeturl/}/{dede:global.cfg_df_style/}/js/zzsc.js"></script>
+		<script src="{dede:global.cfg_templeturl/}/{dede:global.cfg_df_style/}/js/menu.js"></script>
+	</head>
+	<body>
+		{dede:include filename="head.htm"/}
+
+		<div class="products"><div style="width:1005px"><img src="{dede:global.cfg_templeturl/}/{dede:global.cfg_df_style/}/images/aboutus.png" width="1005px"></div></div>
+
+
+
+		<div class="main-content">
+			<div class="main-content-box">
+			  <div class="left">
+					<div class="wrap-menu">
+					</div>
+			  </div>
+			  
+			  <div class="product-list"> 
+						<div class="line">
+							<div class="circle"><img src="{dede:global.cfg_templeturl/}/{dede:global.cfg_df_style/}/images/circle.png"></div>
+							<div class="circle" style=" bottom:0px; margin-left:3.5px; position:absolute">
+								<img src="{dede:global.cfg_templeturl/}/{dede:global.cfg_df_style/}/images/circle.png"/>
+							</div>
+						</div>
+						<div class="nav2">{dede:field.position/}</div>
+						 {dede:field.content/}
+			  </div>
+			</div>
+			<br style="clear:both;">
+		</div>
+
+		{dede:include filename="footer.htm"/}
+
+
+	</body>
+</html>

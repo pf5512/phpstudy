@@ -1,0 +1,20 @@
+@charset "utf-8";
+/* CSS Document */
+*{margin:0 auto;padding: 0 auto;font-family:"微软雅黑"}
+.headline{height:140px;background:#230706;}
+.headline-box{ width:1005px;}
+.logo{ margin-left:20px; margin-top:45px; width:255px; height:65px; float:left}
+.phone{ margin-right:20px; margin-top:60px; font-size:20px; float:right; width:160px; height:45px; color:#FFF; text-align:right}
+.nav { height:32px; background:url(../images/navbg.png)}
+.nav-box{ width:1005px; height:100%;}
+.navline{list-style:none; float:right}
+.navline li{float:left; width:70px; text-align:left; color:#FFF; margin-top:6px; margin-left:20px; font-size:14px}
+.main-content{ background:#b18956; padding-top:25px;}
+.main-content-box{ width:1005px; height:auto; position:relative}
+.product-list{padding-left:16px; float: left; width:750px;}
+.nav2{ font-size:14px; margin-bottom:20px;}
+.left{ width:185px; float:left; height:100%; padding: 0 15px;}
+.line{ width:7px;height:100%;float:left;border-right:1px #000000 dashed;position:absolute; left:210px; margin-top:40px;}
+.circle{ margin-left:3.5px;}
+a{color:#000; text-decoration:none;}
+.Copyright{ font-size:12px; text-align:center;height:70px;background:#b18956; padding-top:60px}

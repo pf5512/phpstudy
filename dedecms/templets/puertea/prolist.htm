@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>{dede:global.cfg_webname/}</title>
+		<link href="{dede:global.cfg_templeturl/}/{dede:global.cfg_df_style/}/css/public.css" rel="stylesheet" type="text/css">
+		<link href="{dede:global.cfg_templeturl/}/{dede:global.cfg_df_style/}/css/product-list.css" rel="stylesheet" type="text/css">
+		<link href="{dede:global.cfg_templeturl/}/{dede:global.cfg_df_style/}/css/menu.css" rel="stylesheet" type="text/css">
+		<script src="{dede:global.cfg_templeturl/}/{dede:global.cfg_df_style/}/js/jquery.js"></script>
+		<script src="{dede:global.cfg_templeturl/}/{dede:global.cfg_df_style/}/js/zzsc.js"></script>
+		<script src="{dede:global.cfg_templeturl/}/{dede:global.cfg_df_style/}/js/menu.js" charset="utf-8"></script>
+		<script src="{dede:global.cfg_templeturl/}/{dede:global.cfg_df_style/}/js/protable.js" charset="utf-8"></script>
+	</head>
+<body>
+
+{dede:include filename="head.htm"/}
+
+<div class="products"><div style="width:1005px"><img src="{dede:global.cfg_templeturl/}/{dede:global.cfg_df_style/}/images/productlist.png" width="1005px"></div></div>
+
+<div class="main-content">
+    <div class="main-content-box">
+      <div class="left">
+           <div class="wrap-menu">
+           </div>
+      </div>
+      <div class="product-list"> 
+                <div class="line">
+                <div class="circle"><img src="{dede:global.cfg_templeturl/}/{dede:global.cfg_df_style/}/images/circle.png"></div>
+                <div class="circle" style=" bottom:0px; margin-left:3.5px; position:absolute">
+                <img src="{dede:global.cfg_templeturl/}/{dede:global.cfg_df_style/}/images/circle.png">
+                </div>
+                </div>
+				
+                <div class="nav2">{dede:field.position/}</div>
+                <table id="www_zzjs_net">
+					<tbody>
+						{dede:list pagesize='4'}
+						<tr style="display: block;">
+							<td>
+								<div class="thumb">
+									[field:array runphp='yes']@me = (empty(@me['litpic']) ? "" : "<a href='{@me['arcurl']}' class='preview'><img src='{@me['litpic']}' width='144' heigth='144'/></a>"); [/field:array]
+								</div>
+								<div class="info">
+									<h1 class="title">[field:title/]</h1>
+									<div class="price">￥[field:trueprice/]</div>
+									<div class="description">[field:description/]...</div>
+								</div>
+							</td>
+						</tr>
+						{/dede:list}
+					</tbody>
+				</table>
+                <div id="changpage">{dede:pagelist listitem="info,index,end,pre,next,pageno,option" listsize="5"/}</div>
+               </div>
+               </div>
+               <br style="clear:both;">
+</div>
+
+{dede:include filename="footer.htm"/} 
+
+
+
+</body></html>

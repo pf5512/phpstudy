@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>{dede:field.title/}_{dede:global.cfg_webname/}</title>
+	<link href="{dede:global.cfg_templeturl/}/{dede:global.cfg_df_style/}/css/public.css" rel="stylesheet" type="text/css">
+	<link href="{dede:global.cfg_templeturl/}/{dede:global.cfg_df_style/}/css/menu.css" rel="stylesheet" type="text/css">
+	<link href="{dede:global.cfg_templeturl/}/{dede:global.cfg_df_style/}/css/news.css" rel="stylesheet" type="text/css">
+	<script src="{dede:global.cfg_templeturl/}/{dede:global.cfg_df_style/}/js/jquery.js"></script>
+	<script src="{dede:global.cfg_templeturl/}/{dede:global.cfg_df_style/}/js/zzsc2.js"></script>
+	<script src="{dede:global.cfg_templeturl/}/{dede:global.cfg_df_style/}/js/menu.js" charset="utf-8"></script>
+	<script src="{dede:global.cfg_templeturl/}/{dede:global.cfg_df_style/}/js/table.js" charset="utf-8"></script>
+</head>
+	<body>
+	{dede:include filename="head.htm"/}
+	<div class="products"><div style="width:1005px"><img src="{dede:global.cfg_templeturl/}/{dede:global.cfg_df_style/}/images/news.png" width="100%"></div></div>
+	<div class="main-content">
+		<div class="main-content-box">
+			<div class="left">
+				<div class="wrap-menu">
+				</div>
+			</div>
+		  
+			<div class="product-list"> 
+		  
+				<div class="line">
+					<div class="circle"><img src="{dede:global.cfg_templeturl/}/{dede:global.cfg_df_style/}/images/circle.png"></div>
+					<div class="circle" style="bottom:0px; margin-left:3.5px; position:absolute">
+						<img src="{dede:global.cfg_templeturl/}/{dede:global.cfg_df_style/}/images/circle.png">
+					</div>
+				</div>
+					
+					<div class="nav2">{dede:field.position/}</div>
+					<div class="list">
+					<table id="www_zzjs_net">
+						<tbody>
+							{dede:list pagesize='10'}
+								<tr style="display: block;">
+									<td>
+										<img src="/templets/puertea/images/d.png">
+										<a href="[field:arcurl/]">
+											<span class="time">[field:pubdate function="GetDateMK(@me)"/]</span>
+											[field:title/]                     
+										</a>
+									</td>
+								</tr>
+							{/dede:list}
+									
+					</tbody></table>
+					</div>
+					<div id="changpage">{dede:pagelist listitem="info,index,end,pre,next,pageno,option" listsize="5"/}</div>
+					</div>
+			 </div>
+			 <br style="clear:both">
+	</div>
+
+	{dede:include filename="footer.htm"/}
+
+
+
+	</body>
+</html>

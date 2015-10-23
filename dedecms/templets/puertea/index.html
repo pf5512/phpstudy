@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0027)http://www.puertea-fch.com/ -->
+<html>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+	<title>{dede:global.cfg_webname/}</title>
+	<link href="{dede:global.cfg_templeturl/}/{dede:global.cfg_df_style/}/css/public.css" rel="stylesheet" type="text/css">
+	<link href="{dede:global.cfg_templeturl/}/{dede:global.cfg_df_style/}/css/index.css" rel="stylesheet" type="text/css">
+	<link href="{dede:global.cfg_templeturl/}/{dede:global.cfg_df_style/}/css/slider.css" rel="stylesheet" type="text/css" media="all">
+<style>
+.imgNum dd.select { width:21px; height:21px; }
+.imgNum dd.select a { width:21px; height:21px; background-image:url(images/point.png); background-position: 0px 0px;}
+
+/* jQuery jcSlider css */
+.jcSlider {width:100%;position: relative;height: 600px;background: url(images/sliderbg.png) no-repeatpadding: 9px;}
+.imgHide { width:100%; height:600px; overflow:hidden; position:relative; }
+.imgList { height:auto; width:800%; position:absolute; top:0; left:0; z-index:1;}
+.imgList li { position:absolute; left:0; top:0; height:600px; width:1980px; list-style:none; display:none; overflow:hidden; }
+.imgNum { position:absolute; left:0; top:0; z-index:2; display:none; }
+.imgNum dd { width:20px; height:20px; float:left; list-style:none; cursor:pointer;  margin:0 3px; overflow:hidden; }
+.imgNum dd a { display:block; height:17px; width:17px; text-indent:-999em; overflow:hidden; text-align:center; line-height:14px; background:url(images/pagination.png) no-repeat 0 0; }
+.imgNum dd a { background-position:0 3px; }
+.imgPrev,.imgNext { position:absolute; left:0; top:10px; z-index:3; display:block; cursor:pointer; height:600px; width:40px;}
+.imgPrev { background:url(images/navigation-previous.png) no-repeat center left; position:absolute; left:50px}
+.imgNext { background:url(images/navigation-next.png) no-repeat center right ;position:absolute;}
+#prev{ left:0;}
+#next{ right:-5px;}
+/* demo2 add css */
+#demo2 .imgNum dd { width:24px; height:24px; float:left; list-style:none; cursor:pointer;  margin:0 4px; overflow:hidden; }
+#demo2 .imgNum dd a { display:block; height:24px; width:24px; overflow:hidden; text-indent:0; text-align:center; line-height:24px; background:url(img/NumBtn.png) no-repeat 0 -27px; color:#000; font-size:13px; }
+#demo2 .imgNum dd a:hover,#demo2 .imgNum dd.select a {  background-position:0 0; color:#fff;}
+</style>
+<script src="{dede:global.cfg_templeturl/}/{dede:global.cfg_df_style/}/js/jquery-1.7.2.min.js" language="javascript" type="text/javascript"></script>
+<script src="{dede:global.cfg_templeturl/}/{dede:global.cfg_df_style/}/js/jQuery-easing.js" language="javascript" type="text/javascript"></script>
+<script src="{dede:global.cfg_templeturl/}/{dede:global.cfg_df_style/}/js/jQuery-jcSlider.js" language="javascript" type="text/javascript"></script>
+<script language="javascript" type="text/javascript" src="{dede:global.cfg_templeturl/}/{dede:global.cfg_df_style/}/js/index.js"></script>
+<script src="{dede:global.cfg_templeturl/}/{dede:global.cfg_df_style/}/js/jquery.carouFredSel-6.0.4-packed.js" type="text/javascript"></script>
+</head>
+<body>
+{dede:include filename="head.htm"/}
+
+<div class="banner">
+     <div id="demo1" class="jcSlider" style="position: relative;">
+		<div class="imgHide" style="position:relative;"><ul class="imgList" style="width: 7920px; position: absolute; top: 0px; left: 0px; z-index: 1;">
+        <li style="position: absolute; left: -30px; top: 0px; display: list-item;"><a target="blank" href="http://shop113595677.taobao.com/" style="display: inline;"><img src="{dede:global.cfg_templeturl/}/{dede:global.cfg_df_style/}/images/0001.jpg" width="1980" height="600"></a></li>
+        <li style="position: absolute; left: 1950px; top: 0px; display: list-item;"><a target="blank" href="http://shop113595677.taobao.com/" style="display: inline;"><img src="{dede:global.cfg_templeturl/}/{dede:global.cfg_df_style/}/images/0002.jpg" width="1980" height="600"></a></li>
+        <li style="position: absolute; left: 3930px; top: 0px; display: list-item;"><a target="blank" href="http://shop113595677.taobao.com/" style="display: inline;"><img src="{dede:global.cfg_templeturl/}/{dede:global.cfg_df_style/}/images/0003.jpg" width="1980" height="600"></a></li>
+        <li style="position: absolute; left: 5910px; top: 0px; display: list-item;"><a target="blank" href="http://shop113595677.taobao.com/" style="display: inline;"><img src="{dede:global.cfg_templeturl/}/{dede:global.cfg_df_style/}/images/0004.jpg" width="1980" height="600"></a></li>
+    </ul></div>
+<dl class="imgNum" style="position: absolute; left: 880px; top: 550px; z-index: 2; width: 160px; height: 60px; display: block;"><dd><a>1</a></dd><dd style="cursor:pointer;float:left;"><a>2</a></dd><dd style="cursor:pointer;float:left;"><a>3</a></dd><dd style="cursor:pointer;float:left;"><a>4</a></dd></dl></div>
+</div>
+
+<div class="info">
+<div class="infobox">
+     <div class="intro">
+           <div class="title"><img src="{dede:global.cfg_templeturl/}/{dede:global.cfg_df_style/}/images/jianjie.png"></div>
+           <div class="content" style="text-indent:2em">
+                 {dede:global.introduct/}
+           </div>
+     </div>
+	 
+     <div class="Products">
+           <div class="title">
+           <img src="{dede:global.cfg_templeturl/}/{dede:global.cfg_df_style/}/images/chanpinzhanshi.png">
+           <a class="more" href="http://www.puertea-fch.com/#">更多&gt;&gt;</a>
+           <div id="inner">
+				<a href="http://www.puertea-fch.com/#" id="prev" class="" style="display: block;"></a>
+				<div class="caroufredsel_wrapper" style="display: block; text-align: start; float: none; position: relative; top: auto; right: auto; bottom: auto; left: auto; z-index: auto; width: 526px; height: 135px; margin: 0px; overflow: hidden;">
+					<div id="carousel" style="text-align: left; float: none; position: absolute; top: 0px; right: auto; bottom: auto; left: 46px; margin: 0px; width: 4006px; height: 135px;">
+						{dede:arclist typeid=4 row=10 orderby=click type='image.'}
+						<div class="jeans" id="jeans" style="margin-right: 5px;">
+							<a href="[field:arcurl/]"><img src="[field:litpic/]" width="140" height="140"></a>
+							<a href="[field:arcurl/]"><em>[field:title/]</em></a>
+						</div>
+						{/dede:arclist}
+					</div>
+				</div>
+				
+				<a href="http://www.puertea-fch.com/#" id="next" class="" style="display: block;"></a>
+			</div>
+           </div>
+     </div>
+	 
+     <div class="contact">
+           <div class="title"><img src="{dede:global.cfg_templeturl/}/{dede:global.cfg_df_style/}/images/lianxiwomen.png"></div>
+           <div class="content">
+                 电话：{dede:global.call/}<br>
+                 手机：{dede:global.phone/}<br>
+                 传真：{dede:global.fax/}<br>
+                 地址：{dede:global.address/}<br>
+                 邮编：{dede:global.code/}
+           </div>
+     </div>
+    </div>
+</div>
+
+{dede:include filename="footer.htm"/}
+
+
+
+</body></html>

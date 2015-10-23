@@ -1,0 +1,7 @@
+@charset "utf-8";
+/* CSS Document */
+.products{ background:none repeat scroll 0% 0% #B2B662;}
+.picture{ width:750px; height:auto;}
+.contentpane{  height:auto; margin-top:30px;}
+h1{ font-size:20px; color:black;}
+.text{ font-size:14px; line-height:2em; text-indent:2em;}
